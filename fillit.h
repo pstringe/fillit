@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/26 11:01:39 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/26 13:28:37 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,6 @@
 #include <fcntl.h>
 #define	TETRA_BYTES	20
 char	*read_tetromino_set(char *file);
+int		error(int code);
+char	*validate_tetromino_set(char *unvalidated_tetromino_set);
 #endif
