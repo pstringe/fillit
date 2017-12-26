@@ -1,6 +1,7 @@
 CC = gcc
 NAME = fillit
-SRCS = fillit.c
+SRCS = fillit.c\
+	   read_tetromino_set.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L./libft -lft
 CFLAGS = -Wall -Werror -Wextra
