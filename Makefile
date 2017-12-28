@@ -35,4 +35,5 @@ debug: $(DNAME)
 
 $(DNAME):
 	$(CC) $(DFLAGS) $(DNAME)
+	export DARGS=test
 	lldb $(DNAME) $(DARGS)
