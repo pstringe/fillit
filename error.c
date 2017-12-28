@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 11:18:20 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/27 16:21:58 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/27 18:41:21 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 int		error(int code)
 {
 	if(code == -1)
-		ft_putstr("file not read");
+		ft_putendl("file not read");
 	else if (code == -2)
-		ft_putstr("wrong number of characters");
+		ft_putendl("wrong number of characters");
 	else if (code == -3)
-		ft_putstr("invalid characters");
+		ft_putendl("invalid characters present in input");
 	else if (code == -4)
-		ft_putstr("wrong number of newlines");
+		ft_putendl("wrong number of newlines present in input");
 	else if (code == -5)
-		ft_putstr("file is invalid");
+		ft_putendl("file is invalid");
 	else if (code == -6)
-		ft_putstr("Bad number of arguments:\nYou must enter one file name as an argument");
+		ft_putendl("Bad number of arguments:\nYou must enter one file name as an argument");
+	else if (code == -7)
+		ft_putendl("failed to allocate tetromino");
 	return (code);
 }
