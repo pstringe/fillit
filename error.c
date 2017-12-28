@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 11:18:20 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/27 18:41:21 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/28 12:04:27 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int		error(int code)
 		ft_putendl("Bad number of arguments:\nYou must enter one file name as an argument");
 	else if (code == -7)
 		ft_putendl("failed to allocate tetromino");
+	else if (code == -8)
+		ft_putendl("one or more supposed tetrominos do not fit the geometric definition of a tetromino");
 	return (code);
 }

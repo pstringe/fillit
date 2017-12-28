@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   dimensional_access.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/28 11:49:28 by pstringe         ###   ########.fr       */
+/*   Created: 2017/12/28 11:44:13 by pstringe          #+#    #+#             */
+/*   Updated: 2017/12/28 11:45:54 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FILLIT_H
-#define FILLIT_H
-#include "libft.h"
-#include <fcntl.h>
-#define	TETRA_BYTES	20
-char	*read_tetromino_set(char *file);
-int		error(int code);
-char	*validate_tetromino_set(char *unvalidated_tetromino_set);
-char	**get_individual_tetrominos(char *valid_tetromino_set);
-int		access_first_dimension(int rowlen, int y, int x);
-#endif
+#include "fillit.h"
+
+int		access_first_dimension(int row_len, int y, int x)
+{
+	return(row_len * y + x);
+}

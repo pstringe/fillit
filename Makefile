@@ -3,7 +3,9 @@ NAME = fillit
 SRCS = fillit.c\
 	   error.c\
 	   read_tetromino_set.c\
-	   file_validation.c
+	   file_validation.c\
+	   label_tetrominos.c\
+	   dimensional_access.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L./libft -lft
 CFLAGS = -Wall -Werror -Wextra
