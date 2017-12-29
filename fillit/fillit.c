@@ -84,4 +84,4 @@ int		main(int argc, char **argv)
 	}
 	ft_putendl("It works");	
 	return (0);
-t a}
+}
