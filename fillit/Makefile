@@ -1,4 +1,5 @@
 CC = gcc
+INC = ../libft
 NAME = fillit
 SRCS = fillit.c\
 	   error.c\
@@ -7,9 +8,9 @@ SRCS = fillit.c\
 	   label_tetrominos.c\
 	   dimensional_access.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
-LIBD = -L./libft -lft
-CFLAGS = -Wall -Werror -Wextra
-OFLAGS = $(CFLAGS) $(LIBD) -o
+LIBD = -L$(INC) -lft
+CFLAGS = -Wall -Werror -Wextra -I$(INC) 
+OFLAGS = $(CFLAGS) -o
 DSRCS = $(SRCS)
 DFLAGS = $(CFLAGS) -g $(LIBD) $(DSRCS) -o
 DNAME = $(NAME)_debug
@@ -18,7 +19,7 @@ DOBJS = $(patsubst %.c, %.o, $(DSRCS))
 all: $(NAME)
 	
 $(NAME): $(OBJS)
-	$(CC) $(OFLAGS) $(NAME) $(OBJS)
+	$(CC) $(OFLAGS) $(NAME) $(LIBD) $(OBJS)
 
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS)
