@@ -10,7 +10,7 @@ SRCS = fillit.c\
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 
-OFLAGS = $(CFLAGS) -o
+OFLAGS =  -o $(NAME) $(OBJS) $(LIBD)
 DSRCS = $(SRCS)
 DFLAGS = $(CFLAGS) -g $(LIBD) $(DSRCS) -o
 DNAME = $(NAME)_debug
@@ -19,8 +19,7 @@ DOBJS = $(patsubst %.c, %.o, $(DSRCS))
 all: $(NAME)
 	
 $(NAME): $(OBJS)
-	$(CC) $(OFLAGS) $(NAME) $(LIBD) $(OBJS)
-
+	$(CC) $(OFLAGS)
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS)
 

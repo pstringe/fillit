@@ -36,14 +36,14 @@ static int		is_valid_tetromino (char *tetromino)
 	{
 		return (0);
 	}
-	if(has_valid_number_of_monominos(tetromino) && has_valid_number_of_connections(tetromino))
+	if(has_valid_numbe_of_monominos(tetromino) && has_valid_number_of_connections(tetromino))
 	{
 		return (1);
 	}
 	return (0);
 }
 
-char	**validate_tetrominos(char **tetrominos)
+char	**validate_tetrominos(tetrominos)
 {
 	int i;
 
@@ -52,9 +52,8 @@ char	**validate_tetrominos(char **tetrominos)
 	{
 		if(!is_valid_tetromino(tetrominos[i]))
 		{
-			ft_two_d_free((void **)tetrominos);
+			ft_two_d_free(tetrominos);
 		}
-        i++;
 	}
 	return (tetrominos);
 }
@@ -63,6 +62,7 @@ int		main(int argc, char **argv)
 {
 	char 	*unvalidated_tetromino_set;
 	char	*valid_tetromino_set;
+	char	**valid_tetrominos;
 	char	**tetrominos;
 
 	if(argc != 2)
@@ -84,4 +84,4 @@ int		main(int argc, char **argv)
 	}
 	ft_putendl("It works");	
 	return (0);
-t a}
+}
