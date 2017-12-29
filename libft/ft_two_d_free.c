@@ -14,10 +14,11 @@
 
 void	ft_two_d_free(void **array)
 {
+	void **head = array;
 	while (*array)
 	{
 		free(*array);
 		array++;
 	}
-	free(array);
+	free(*head);
 }
