@@ -3,61 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
+/*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 16:27:29 by ralee            ###   ########.fr       */
+/*   Updated: 2017/12/30 10:31:32 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-static int		has_valid_number_of_connections(char *tetromino)
-{
-	if(!tetromino)
-	{
-		return (0);
-	}
-	return(1);
-}
-
-static int		has_valid_number_of_monominos(char *tetromino)
-{
-	if(!tetromino)
-	{
-		return (0);
-	}	
-	return (1);
-}
-
-static int		is_valid_tetromino (char *tetromino)
-{
-	if(!tetromino)
-	{
-		return (0);
-	}
-	if(has_valid_number_of_monominos(tetromino) && has_valid_number_of_connections(tetromino))
-	{
-		return (1);
-	}
-	return (0);
-}
-
-char	**validate_tetrominos(char **tetrominos)
-{
-	int i;
-
-	i = 0;
-	while (*(tetrominos + i))
-	{
-		if(!is_valid_tetromino(tetrominos[i]))
-		{
-			ft_two_d_free((void **)tetrominos);
-		}
-        i++;
-	}
-	return (tetrominos);
-}
 
 int		main(int argc, char **argv)
 {
