@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 18:49:21 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:15:26 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 		tetromino_count++;
 		row_count += 4;
 	}
-	tetrominos[tetromino_count] = "";
+	tetrominos[tetromino_count] = NULL;
 
 	return (tetrominos);
 }
