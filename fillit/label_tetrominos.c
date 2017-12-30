@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/28 11:41:25 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:49:21 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 	int		row_count;
 	int 	tetromino_allocation;
 
-	tetromino_allocation = get_number_of_tetrominos(valid_tetromino_set);
+	tetromino_allocation = get_number_of_tetrominos(valid_tetromino_set) + 1;
 	tetrominos = (char**)malloc(tetromino_allocation * sizeof(char **));
 	tetromino_rows = ft_strsplit(valid_tetromino_set, '\n');	
 	tetromino_count = 0;
@@ -78,6 +78,7 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 		tetromino_count++;
 		row_count += 4;
 	}
+	tetrominos[tetromino_count] = "";
 
 	return (tetrominos);
 }

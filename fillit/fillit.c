@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 18:33:25 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:50:37 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	**validate_tetrominos(char **tetrominos)
 
 	i = 0;
 	/*here lies the issue*/
-	while ((tetrominos + i))
+	while (*(tetrominos + i))
 	/*********************/
 	{
 		if(!is_valid_tetromino(tetrominos[i]))
