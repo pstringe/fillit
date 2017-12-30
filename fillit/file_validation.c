@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 13:18:03 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/26 13:28:30 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/29 17:15:59 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static  int is_valid_filesize(char *unvalidated_tetromino_set)
     {
         filesize = counter + 1;
     }
+    filesize++;
     if(filesize % 21 == 0 && filesize <= 26 * 21)
     {
         return (1);
@@ -69,11 +70,11 @@ static int  is_valid_number_of_newlines(char *unvalidated_tetromino_set)
             number_of_newlines++;
         }
     }
-    if(number_of_newlines % 5 == 0 && number_of_newlines / (file_size / 21) == 5)
+    if((number_of_newlines + 1) % 5 == 0 && (number_of_newlines + 1) / (file_size + 1 / 21) == 5)
     {
-        return (1);
+        return (0);
     }
-    return (0);
+    return (1);
 }
 
 char    *validate_tetromino_set(char *unvalidated_tetromino_set)
