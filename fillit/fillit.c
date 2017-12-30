@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 16:33:09 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:33:25 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static int		has_valid_number_of_monominos(char *tetromino)
 
 static int		is_neighbor(char *tetromino, int i)
 {
+	if (!(tetromino + i))
+	{
+		return (0);
+	}
 	if (i >= 0 && i < 16 && tetromino[i] != '.')
 	{
 		return (1);
@@ -41,8 +45,8 @@ static int		get_number_of_neighbors(char *tetromino, int i)
 	int down;
 
 	coords = access_second_dimension(4, i);
-	x = coords[1];
-	y = coords[2];
+	x = coords[0];
+	y = coords[1];
 
 	right = access_first_dimension(4, y, x - 1);
 	left = access_first_dimension(4, y, x + 1);
@@ -54,15 +58,15 @@ static int		get_number_of_neighbors(char *tetromino, int i)
 	{
 		neighbors++;
 	}
-	else if (is_neighbor(tetromino, left))
+	if (is_neighbor(tetromino, left))
 	{
 		neighbors++;
 	}
-	else if (is_neighbor(tetromino, up))
+	if (is_neighbor(tetromino, up))
 	{
 		neighbors++;
 	}
-	else if (is_neighbor(tetromino, down))
+	if (is_neighbor(tetromino, down))
 	{
 		neighbors++;
 	}
@@ -82,19 +86,14 @@ static int		has_valid_number_of_connections(char *tetromino)
 	neighbors = 0;
 	while (tetromino[++i])
 	{
-		if(tetromino[i] == '.')
-		{
-			i++;
-		}
-		else if(neighbors >= 6)
+		if(neighbors >= 6)
 		{
 			return (1);
 		}
-		else
+		else if (tetromino[i] != '.')
 		{
 			neighbors += get_number_of_neighbors(tetromino, i);
 		}
-		i++;
 	}
 	if (neighbors >= 6)
 	{
@@ -121,7 +120,9 @@ char	**validate_tetrominos(char **tetrominos)
 	int i;
 
 	i = 0;
-	while (*(tetrominos + i))
+	/*here lies the issue*/
+	while ((tetrominos + i))
+	/*********************/
 	{
 		if(!is_valid_tetromino(tetrominos[i]))
 		{
