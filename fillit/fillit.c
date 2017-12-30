@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 18:50:37 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:28:41 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,25 @@
 
 static int		has_valid_number_of_monominos(char *tetromino)
 {
+	int monominos;
 	if(!tetromino)
 	{
 		return (0);
 	}
-	return(1);
+	monominos = 0;
+	while(*tetromino)
+	{
+		if(*tetromino != '.')
+		{
+			monominos++;
+		}
+		tetromino++;
+	}
+	if (monominos == 4)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 static int		is_neighbor(char *tetromino, int i)
@@ -120,9 +134,7 @@ char	**validate_tetrominos(char **tetrominos)
 	int i;
 
 	i = 0;
-	/*here lies the issue*/
 	while (*(tetrominos + i))
-	/*********************/
 	{
 		if(!is_valid_tetromino(tetrominos[i]))
 		{
