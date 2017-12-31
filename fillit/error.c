@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 11:18:20 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 15:39:39 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/30 11:47:58 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ int		error(int code)
 		ft_putendl("one or more supposed tetrominos do not fit the geometric definition of a tetromino. See the above reason.");
 	else if (code == -9)
 		ft_putendl("one or more of you tetrominos does not contain enough adjecencies");
+	else if (code == -10)
+		ft_putendl("failed to deliver encoded tetrominos");
+	else if (code == -11)
+		ft_putendl("failed to encode tetromino");
 	return (code);
 }
