@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label_tetrominos.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 19:15:26 by pstringe         ###   ########.fr       */
+/*   Updated: 2017/12/31 16:17:39 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char *get_tetromino(char **rows, int order)
 int			get_number_of_tetrominos(char *tetromino_set)
 {
 	int tetrominos;
-	tetrominos = ft_strlen(tetromino_set) / 21;
+	tetrominos = (ft_strlen(tetromino_set) + 1) / 21;
 	return (tetrominos);
 }
 
@@ -69,7 +69,17 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 
 	tetromino_allocation = get_number_of_tetrominos(valid_tetromino_set) + 1;
 	tetrominos = (char**)malloc(tetromino_allocation * sizeof(char **));
-	tetromino_rows = ft_strsplit(valid_tetromino_set, '\n');	
+	tetromino_rows = ft_strsplit(valid_tetromino_set, '\n');
+	ft_putstr(&tetromino_rows[0][0]);
+	ft_putchar('\n');
+	ft_putstr(&tetromino_rows[1][0]);
+	ft_putchar('\n');
+	ft_putstr(&tetromino_rows[2][0]);
+	ft_putchar('\n');
+	ft_putstr(&tetromino_rows[3][0]);
+	ft_putchar('\n');
+	ft_putstr(&tetromino_rows[4][0]);
+	ft_putchar('\n');
 	tetromino_count = 0;
 	row_count = 0;
 	while(tetromino_rows[row_count])
