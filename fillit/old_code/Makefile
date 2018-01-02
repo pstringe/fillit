@@ -6,8 +6,8 @@ SRCS = fillit.c\
 	   read_tetromino_set.c\
 	   file_validation.c\
 	   label_tetrominos.c\
-	   dimensional_access.c\
-	   validate_tetrominos.c
+	   #dimensional_access.c\
+	   #validate_tetrominos.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 

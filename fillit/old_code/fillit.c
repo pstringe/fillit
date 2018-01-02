@@ -6,11 +6,19 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/30 10:31:32 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/01 14:44:45 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+typedef	struct	tet_list
+{
+	int				order;
+	uint16_t		value;
+	struct tetlist	*next;
+	struct tetlist	*previous;
+}				tet;
 
 int		main(int argc, char **argv)
 {
@@ -29,12 +37,13 @@ int		main(int argc, char **argv)
 		return(error(-5));
 	}
 	tetrominos = get_individual_tetrominos(valid_tetromino_set);
-	/*validate the tetrominos according to number of omminos and connections*/
+	/*validate the tetrominos according to number of omminos and connections
 	tetrominos = validate_tetrominos(tetrominos);
 	if(!tetrominos)
 	{
 		return(error(-8));
 	}
+	*/
 	ft_putendl("It works");	
 	return (0);
 }
