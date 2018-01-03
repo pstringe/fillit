@@ -1,11 +1,11 @@
 CC = gcc
 INC = ../libft
-NAME = fillit
-SRCS = fillit.c\
-	   error.c\
-	   read_tetromino_set.c\
-	   file_validation.c\
-	   label_tetrominos.c\
+NAME = dlx
+SRCS = main.c\
+	   #error.c\
+	   #read_tetromino_set.c\
+	   #file_validation.c\
+	   #label_tetrominos.c\
 	   #dimensional_access.c\
 	   #validate_tetrominos.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
@@ -38,5 +38,4 @@ debug: $(DNAME)
 
 $(DNAME):
 	$(CC) $(DFLAGS) $(DNAME)
-	export DARGS=test
 	lldb $(DNAME) $(DARGS)
