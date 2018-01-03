@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/01 15:46:16 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/02 17:43:43 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int		main(int argc, char **argv)
 	tetrominos = get_individual_tetrominos(valid_tetromino_set);
 	/*validate the tetrominos according to number of omminos and connections*/
 	tetrominos = validate_tetrominos(tetrominos);
+	// normalize_tetrominos moves all tetrominos to top left corner
+	normalize_tetrominos(tetrominos);
 	if(!tetrominos)
 	{
 		return(error(-8));
 	}
-	ft_putendl("It works");	
+	ft_putendl("It works");
 	return (0);
 }
