@@ -2,6 +2,7 @@ CC = gcc
 INC = ../libft
 NAME = dlx
 SRCS = main.c\
+	   generate_problem_matrix.c
 	   #error.c\
 	   #read_tetromino_set.c\
 	   #file_validation.c\
