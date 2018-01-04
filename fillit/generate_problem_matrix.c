@@ -9,6 +9,7 @@
 /*   Updated: 2018/01/03 16:25:08 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "dlx.h"
 
 int		**populate_problem_matrix(int **matrix)

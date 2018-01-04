@@ -11,7 +11,58 @@
 /* ************************************************************************** */
 
 #include "dlx.h"
+typedef struct	Node
+{
+	struct Node		*left;
+	struct Node 	*right;
+	struct Node		*up;
+	struct Node 	*down;
+	int 			row;
+	int 			col;
+	int				nodeCount;
 
+}				node;
+
+node	*create_toroidal_matrix(problem_matrix, row_no, col_no)
+{
+	int 	flag;
+	int 	i;
+	int		j;
+	int		a;
+	int		b;
+	node	*header;
+	node	**torus;
+	
+	header = create_node();
+	torus = create_head();
+	i = -1;
+	while (++i <= row_no)
+	{
+		j = -1;
+		while (++j <= col_no)
+		{
+			if(problem_matrix[i][j])
+			{
+				if(i)
+				{
+					torus[0][j]->nodeCount += 1;
+				}
+				torus[i][j]->row = i;
+				torus[i][j]->col = j;
+				
+				flag = 1;
+				a = i;
+				b = j;
+
+				while(!problem_matrix[a][b] && b != j)
+				{
+					
+				}
+			}
+		}
+	}
+	
+}
 int		main(void)
 {
 	int 		row_no;
@@ -25,6 +76,6 @@ int		main(void)
 	display_matrix(problem_matrix, row_no, col_no);
 	problem_matrix = populate_problem_matrix(problem_matrix);
 	display_matrix(problem_matrix, row_no, col_no);
-	/*create_toroidal_matrix(problem_matrix, row_no, col_no);*/
+	create_toroidal_matrix(problem_matrix, row_no, col_no);
 	return (0);
 }
