@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/30 19:04:40 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +92,7 @@ int		solve(unsigned short int *tet_codes)
 	//print_board(board);
 	return(1);
 }
+
 int		main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;

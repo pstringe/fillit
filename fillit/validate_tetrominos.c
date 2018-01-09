@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tetrominos.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 20:00:45 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 20:02:24 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/01 15:45:04 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static int		get_number_of_neighbors(char *tetromino, int i)
 	x = coords[0];
 	y = coords[1];
 
-	right = access_first_dimension(4, y, x - 1);
-	left = access_first_dimension(4, y, x + 1);
+	left = access_first_dimension(4, y, x - 1);
+	right = access_first_dimension(4, y, x + 1);
 	up = access_first_dimension(4, y - 1, x);
 	down = access_first_dimension(4, y + 1, x);
 	neighbors = 0;

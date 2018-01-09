@@ -8,7 +8,8 @@ SRCS = fillit.c\
 	   label_tetrominos.c\
 	   dimensional_access.c\
 	   validate_tetrominos.c\
-	   bitwise_encoder.c
+	   bitwise_encoder.c\
+	   normalize_tetromino.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 
@@ -39,5 +40,4 @@ debug: $(DNAME)
 
 $(DNAME):
 	$(CC) $(DFLAGS) $(DNAME)
-	export DARGS=test
 	lldb $(DNAME) $(DARGS)

@@ -63,6 +63,7 @@ unsigned short int	*read_and_validate_tets(int argc, char **argv)
 	}
 	tetrominos = get_individual_tetrominos(valid_tetromino_set);
 	tetrominos = validate_tetrominos(tetrominos);
+	normalize_tetrominos(tetrominos);
 	if(!tetrominos)
 	{
 		error(-8);
