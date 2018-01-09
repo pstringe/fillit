@@ -44,7 +44,7 @@ typedef struct	s_board
 	struct grid_location	*origin;
 }				t_board;
 
-t_tet	*inititalize_spatial_tet(unsigned short int code, int order)
+t_tet	*initialize_spatial_tet(unsigned short int code, int order)
 {
 	t_tet	*tet;
 	tet = malloc(sizeof(t_tet*));
@@ -53,44 +53,45 @@ t_tet	*inititalize_spatial_tet(unsigned short int code, int order)
 	tet->origin = NULL;
 	tet->second = NULL;
 	tet->third	= NULL;
-	tet->fourth = NULL:
-	return (tet)
+	tet->fourth = NULL;
+	return (tet);
 }
 
-t_tet	**prepare_for_placement(unsigned short int tet_codes)
+t_tet	**prepare_for_placement(unsigned short int *tet_codes)
 {
 	t_tet **spatial_tets;
 	
 	int	i;
 
 	i = 0;
-	while(tet_codes)
+	while(tet_codes[i++])
 	{
-		i++;
+		
 	}
 	spatial_tets = malloc(sizeof(t_tet*) * i + 1);
 	i = -1;
 	while(tet_codes[++i])
 	{
-		*(spatial_tets + i) = initialize_spatial_tet(tet_codes[1], i);
+		*(spatial_tets + i) = initialize_spatial_tet(tet_codes[i], i);
 	}
 	spatial_tets[i] = NULL;
 	return (spatial_tets);
 }
 
-int		solve(unsigned short int tet_codes)
+int		solve(unsigned short int *tet_codes)
 {
 	t_tet		**tets;
-	s_board 	*board;
+	//t_board 	*board;
 	
 	tets = prepare_for_placement(tet_codes);
-	while(tets)
+	while(*tets)
 	{
-		print_encoded_tetromino(*tets);
+		print_encoded_tetromino((*tets)->value);
 		tets++;
 	}
 	//generate_board(tets, size);
-	print_board(board);
+	//print_board(board);
+	return(1);
 }
 int		main(int argc, char **argv)
 {
