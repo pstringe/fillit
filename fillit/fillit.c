@@ -12,52 +12,70 @@
 
 #include "fillit.h"
 
-typedef struct square_grid
+typedef struct	square_grid
 {
 	int		side;
 	char	**array;
 }				grid;
+
 typedef struct	grid_location
 {
-	int	x;
-	int	y;
-}				point;
-typedef			tetromino
-{
-	int			order;
-	int			value;
-}				tet;
+	int						x;
+	int						y;
 
-int		main(int argc, char **argv)
+	int						value;
+	int						parent;
+	
+	struct grid_location	*prev;
+	struct grid_location	*next;
+
+	struct grid_location	*up;
+	struct grid_location	*down;
+	struct grid_location	*right;
+	struct grid_location	*left;
+}				point;
+
+typedef struct	tetromino
+{
+	int		order;
+	int		value;
+	struct grid_location *origin;
+	struct grid_location *second;
+	struct grid_location *third;
+}				tet;
+unsigned short int	*read_and_validate_tets(int argc, char **argv)
 {
 	char				*unvalidated_tetromino_set;
 	char				*valid_tetromino_set;
 	char				**tetrominos;
 	unsigned short int	*encoded_tetrominos;
-	tet					**tets;
-
+	
 	if(argc != 2)
-	{
-		return (error(-6));
-	}
+		error(-6);
+		encoded_tetrominos = 0;
 	unvalidated_tetromino_set = read_tetromino_set(argv[1]);
 	valid_tetromino_set = validate_tetromino_set(unvalidated_tetromino_set);
 	if(!valid_tetromino_set)
-	{
-		return(error(-5));
-	}
+		error(-5);
+		encoded_tetrominos = 0;
 	tetrominos = get_individual_tetrominos(valid_tetromino_set);
-	/*validate the tetrominos according to number of omminos and connections*/
 	tetrominos = validate_tetrominos(tetrominos);
 	if(!tetrominos)
-	{
-		return(error(-8));
-	}
+		error(-8);
+		encoded_tetrominos = 0;
 	if(!(encoded_tetrominos = encode_tetrominos(tetrominos)))
+		error(-10);	
+		encoded_tetrominos = 0;
+	return (encoded_tetrominos);
+}
+int		main(int argc, char **argv)
+{
+	unsigned short int	*tet_codes;
+
+	if(!(tet_codes = read_and_validate_tets(argc, argv)))
 	{
-		return(error(-10));
+		ft_putendl("Your shit sucks!");
 	}
-	tets = prepare_for_placement(encoded_tetrominos);
 	ft_putendl("It works");
 	return (0);
 }
