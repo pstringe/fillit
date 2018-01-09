@@ -12,24 +12,29 @@
 
 #include "fillit.h"
 
-typedef struct		grid_location
+typedef struct square_grid
 {
-	int						monomino_present;
-	int						tetromino_parent;
-	int						x;
-	int						y;
-	struct grid_location	*up;
-	struct grid_location	*down;
-	struct grid_location	*left;
-	struct grid_location	*right;
-}
+	int		side;
+	char	**array;
+}				grid;
+typedef struct	grid_location
+{
+	int	x;
+	int	y;
+}				point;
+typedef			tetromino
+{
+	int			order;
+	int			value;
+}				tet;
 
 int		main(int argc, char **argv)
 {
-	char 		*unvalidated_tetromino_set;
-	char		*valid_tetromino_set;
-	char		**tetrominos;
+	char				*unvalidated_tetromino_set;
+	char				*valid_tetromino_set;
+	char				**tetrominos;
 	unsigned short int	*encoded_tetrominos;
+	tet					**tets;
 
 	if(argc != 2)
 	{
@@ -52,16 +57,7 @@ int		main(int argc, char **argv)
 	{
 		return(error(-10));
 	}
-	/*make sure the intgers were actually placed in the array*/
-	int i;
-	i = 0;
-	while (i < 1)
-	{
-		print_encoded_tetromino(*encoded_tetrominos);
-		encoded_tetrominos++;
-		i++;
-	}
-
+	tets = prepare_for_placement(encoded_tetrominos);
 	ft_putendl("It works");
 	return (0);
 }
