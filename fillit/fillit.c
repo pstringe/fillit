@@ -43,31 +43,6 @@ typedef struct	tetromino
 	struct grid_location *second;
 	struct grid_location *third;
 }				tet;
-unsigned short int	*read_and_validate_tets(int argc, char **argv)
-{
-	char				*unvalidated_tetromino_set;
-	char				*valid_tetromino_set;
-	char				**tetrominos;
-	unsigned short int	*encoded_tetrominos;
-	
-	if(argc != 2)
-		error(-6);
-		encoded_tetrominos = 0;
-	unvalidated_tetromino_set = read_tetromino_set(argv[1]);
-	valid_tetromino_set = validate_tetromino_set(unvalidated_tetromino_set);
-	if(!valid_tetromino_set)
-		error(-5);
-		encoded_tetrominos = 0;
-	tetrominos = get_individual_tetrominos(valid_tetromino_set);
-	tetrominos = validate_tetrominos(tetrominos);
-	if(!tetrominos)
-		error(-8);
-		encoded_tetrominos = 0;
-	if(!(encoded_tetrominos = encode_tetrominos(tetrominos)))
-		error(-10);	
-		encoded_tetrominos = 0;
-	return (encoded_tetrominos);
-}
 int		main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;
@@ -75,6 +50,7 @@ int		main(int argc, char **argv)
 	if(!(tet_codes = read_and_validate_tets(argc, argv)))
 	{
 		ft_putendl("Your shit sucks!");
+		return (-1);
 	}
 	ft_putendl("It works");
 	return (0);
