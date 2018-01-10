@@ -9,6 +9,7 @@ SRCS = fillit.c\
 	   dimensional_access.c\
 	   validate_tetrominos.c\
 	   bitwise_encoder.c\
+	   spatial_manipulation.c\
 	   normalize_tetromino.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft

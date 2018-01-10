@@ -17,6 +17,41 @@
 #include <stdlib.h>
 #define	TETRA_BYTES	20
 //char	*read_tetromino_set(char *file);
+
+typedef struct	s_grid_location
+{
+	int						x;
+	int						y;
+	int						value;
+	int						parent;
+	struct grid_location	*prev;
+	struct grid_location	*next;
+	struct grid_location	*up;
+	struct grid_location	*down;
+	struct grid_location	*right;
+	struct grid_location	*left;
+}				point;
+
+typedef struct	s_tetromino
+{
+	int						order;
+	int						value;
+	struct grid_location	*origin;
+	struct grid_location	*second;
+	struct grid_location	*third;
+	struct grid_location	*fourth;
+}				t_tet;
+
+typedef struct	s_board
+{
+	int						validity;
+	int						size;
+	unsigned short int		*tets;
+	struct grid_location	*origin;
+}				t_board;
+
+t_tet	**prepare_for_placement(unsigned short int *tet_codes);
+t_tet	*initialize_spatial_tet(unsigned short int code, int order);
 int		error(int code);
 char	*validate_tetromino_set(char *unvalidated_tetromino_set);
 char	**get_individual_tetrominos(char *valid_tetromino_set);
