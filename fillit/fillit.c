@@ -40,12 +40,12 @@ int		min_size_given(t_tet **tets)
 	return (2);
 }
 
-t_point		*push_point_tail(t_point *previous, int x_coord, int y_coord)
+t_point		*push_point_tail(t_board *board, t_point *previous, int x_coord, int y_coord)
 {
 	t_point *new;
 
 	new = malloc(sizeof(t_point));
-	new->order = access_first_dimension();
+	new->order = access_first_dimension(board->size, x_coord, y_coord);
 	new->x = x_coord;
 	new->y = y_coord;
 	new->prev = previous;
@@ -66,17 +66,17 @@ t_board		*board_alloc(int size, t_tet **tets)
 
 	board = malloc(sizeof(t_board*));
 	board->validity = 1;
-	board->size = 2;
+	board->size = size;
 	board->tets = tets;
-	board->origin = push_point_tail(NULL,0,0);
+	board->origin = push_point_tail(board, NULL, 0, 0);
 	tmp = board->origin;
 	x = 0;
 	while(++x < size)
 	{
 		y = -1;
-		while(++y < size)
+		while(++y < (size * size))
 		{
-			tmp = push_point_tail(tmp, x, y);
+			tmp = push_point_tail(board, tmp, x, y);
 		}
 	}
 	return (board);
@@ -91,14 +91,16 @@ t_board		*generate_board(t_tet **tets, int size)
 
 void		print_board(t_board *board)
 {
+	int size;
 	int i;
 	t_point *tmp;
 
+	size = board->size;
 	i = -1;
 	tmp = board->origin;
-	while(tmp && ++i < board_size * board_size)
+	while (tmp && ++i < size * size)
 	{
-		if(i % board->size == 0)
+		if (i % size == 0 && i != 0 && i != size)
 		{
 			ft_putchar('\n');
 		}
