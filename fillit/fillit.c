@@ -11,24 +11,116 @@
 
 #include "fillit.h"
 
+int		int_sqrt(int y, int x)
+{
+	if(y * y > x)
+	{
+		return (y - 1);
+	}
+	else
+	{
+		return (int_sqrt(++y, x));
+	}
+}
 
-int		solve(unsigned short int *tet_codes)
+int		min_size_given(t_tet **tets)
+{
+	int no_of_tets;
+
+	no_of_tets = 0;
+	while (*tets)
+	{
+		tets++;
+		no_of_tets++;
+	}
+	if(no_of_tets != 1)
+	{
+		return (int_sqrt(0, no_of_tets * 4));
+	}
+	return (2);
+}
+
+t_point		*push_point_tail(t_point *previous, int x_coord, int y_coord)
+{
+	t_point *new;
+
+	new = malloc(sizeof(t_point));
+	new->order = access_first_dimension();
+	new->x = x_coord;
+	new->y = y_coord;
+	new->prev = previous;
+	new->next = NULL;
+	if(previous)
+	{
+		previous->next = new;
+	}
+	return(new);
+}
+
+t_board		*board_alloc(int size, t_tet **tets)
+{
+	int		x;
+	int		y;
+	t_point *tmp;
+	t_board *board;
+
+	board = malloc(sizeof(t_board*));
+	board->validity = 1;
+	board->size = 2;
+	board->tets = tets;
+	board->origin = push_point_tail(NULL,0,0);
+	tmp = board->origin;
+	x = 0;
+	while(++x < size)
+	{
+		y = -1;
+		while(++y < size)
+		{
+			tmp = push_point_tail(tmp, x, y);
+		}
+	}
+	return (board);
+}
+
+t_board		*generate_board(t_tet **tets, int size)
+{
+	t_board *board;
+	board = board_alloc(size, tets);
+	return(board);
+}
+
+void		print_board(t_board *board)
+{
+	int i;
+	t_point *tmp;
+
+	i = -1;
+	tmp = board->origin;
+	while(tmp && ++i < board_size * board_size)
+	{
+		if(i % board->size == 0)
+		{
+			ft_putchar('\n');
+		}
+		else
+		{
+			ft_putchar('.');
+		}
+		tmp = tmp->next;
+	}
+}
+int			solve(unsigned short int *tet_codes)
 {
 	t_tet		**tets;
-	//t_board 	*board;
-	
+	t_board 	*board;	
+
 	tets = prepare_for_placement(tet_codes);
-	while(*tets)
-	{
-		print_encoded_tetromino((*tets)->value);
-		tets++;
-	}
-	//generate_board(tets, size);
-	//print_board(board);
+	board = generate_board(tets, min_size_given(tets));
+	print_board(board);
 	return(1);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;
 

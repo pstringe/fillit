@@ -39,6 +39,6 @@ re: fclean
 
 debug: $(DNAME)
 
-$(DNAME):
+$(DNAME): fclean
 	$(CC) $(DFLAGS) $(DNAME)
 	lldb $(DNAME) $(DARGS)

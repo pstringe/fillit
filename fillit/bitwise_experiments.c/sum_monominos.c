@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 20:11:02 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/30 20:24:21 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/10 16:02:47 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ int		main(void)
 	int 		sum;
 
 	sum = 0;
-	tet = 15;
+	tet = 129;
 	i	= 0;
+	//10000001 tet
+	//00000000
+	//
+	//10000000 this is the result we are comparing
+	//
 	while (i < 16)
 	{
 		if(tet & ( 1 << i))
