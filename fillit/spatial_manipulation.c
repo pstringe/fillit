@@ -14,8 +14,9 @@ t_tet	*initialize_spatial_tet(unsigned short int code, int order)
 	return (tet);
 }
 
-t_tet	**prepare_for_placement(unsigned short int *tet_codes)
+t_ets	*prepare_for_placement(unsigned short int *tet_codes)
 {
+	t_ets *tets;
 	t_tet **spatial_tets;
 	
 	int	i;
@@ -25,13 +26,17 @@ t_tet	**prepare_for_placement(unsigned short int *tet_codes)
 	{
 		
 	}
+	tetrs = malloc(sizeof(t_ets*));
 	spatial_tets = malloc(sizeof(t_tet*) * i + 1);
 	i = -1;
 	while(tet_codes[++i])
 	{
 		*(spatial_tets + i) = initialize_spatial_tet(tet_codes[i], i);
-	}
+	}	
 	spatial_tets[i] = NULL;
-	return (spatial_tets);
+	tetrs->head = 0;
+	tetrs->no_of_tets = i;
+	tetrs->tets = spatial_tets;
+	return (tetrs);
 }
 
