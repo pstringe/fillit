@@ -13,9 +13,9 @@
 
 int		int_sqrt(int y, int x)
 {
-	if(y * y > x)
+	if(y * y >= x)
 	{
-		return (y - 1);
+		return (y);
 	}
 	else
 	{
@@ -98,7 +98,7 @@ void		print_board(t_board *board)
 	size = board->size;
 	i = -1;
 	tmp = board->origin;
-	while (tmp && ++i < size * size)
+	while (tmp && ++i < (size * size))
 	{
 		if (i % size == 0 && i != 0 && i != size)
 		{
@@ -111,6 +111,7 @@ void		print_board(t_board *board)
 		tmp = tmp->next;
 	}
 }
+
 int			solve(unsigned short int *tet_codes)
 {
 	t_tet		**tets;
