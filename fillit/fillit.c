@@ -13,9 +13,13 @@
 
 int		int_sqrt(int y, int x)
 {
-	if(y * y >= x)
+	if(y * y == x)
 	{
 		return (y);
+	}
+	else if ( y * y > x)
+	{
+		return (y - 1);
 	}
 	else
 	{
@@ -45,7 +49,7 @@ t_point		*push_point_tail(t_board *board, t_point *previous, int x_coord, int y_
 	t_point *new;
 
 	new = malloc(sizeof(t_point));
-	new->order = access_first_dimension(board->size, x_coord, y_coord);
+	new->order = access_first_dimension(board->size, y_coord, x_coord);
 	new->x = x_coord;
 	new->y = y_coord;
 	new->prev = previous;
@@ -100,16 +104,20 @@ void		print_board(t_board *board)
 	tmp = board->origin;
 	while (tmp && ++i < (size * size))
 	{
-		if (i % size == 0 && i != 0 && i != size)
+		ft_putchar('[');
+		ft_putnbr(tmp->x);
+		ft_putchar(',');
+		ft_putchar(' ');
+		ft_putnbr(tmp->y);
+		ft_putchar(']');
+
+		if (i % size == 0 && i != 0 && i != size * size - 1)
 		{
 			ft_putchar('\n');
 		}
-		else
-		{
-			ft_putchar('.');
-		}
 		tmp = tmp->next;
 	}
+	ft_putchar('\n');
 }
 
 int			solve(unsigned short int *tet_codes)
