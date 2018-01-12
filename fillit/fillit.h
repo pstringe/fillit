@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/12 03:37:44 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/12 12:11:23 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef struct		s_tetromino
 	struct s_grid_location	*third;
 	struct s_grid_location	*fourth;
 }					t_tet;
+
+typedef struct		s_et
+{
+	int						head;
+	int						no_of_tets;
+	struct	s_tetromino		**tets;
+}					t_ets
 
 typedef struct		s_board
 {

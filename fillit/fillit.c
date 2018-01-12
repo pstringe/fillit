@@ -10,7 +10,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+/*
 int		int_sqrt(int y, int x)
 {
 	if(y * y == x)
@@ -74,7 +74,7 @@ t_board		*board_alloc(int size, t_tet **tets)
 	board->tets = tets;
 	board->origin = push_point_tail(board, NULL, 0, 0);
 	tmp = board->origin;
-	x = 0;
+	x = -1;
 	while(++x < size)
 	{
 		y = -1;
@@ -120,27 +120,44 @@ void		print_board(t_board *board)
 	ft_putchar('\n');
 }
 
-int			solve(unsigned short int *tet_codes)
+int			solve(t_board *board)
 {
-	t_tet		**tets;
-	t_board 	*board;	
-
-	tets = prepare_for_placement(tet_codes);
-	board = generate_board(tets, min_size_given(tets));
-	print_board(board);
-	return(1);
+	if (not_possible_solution(board))
+	{
+		return (NULL);
+	}
+	if (is_solution(board))
+	{
+		return (board);
+	}
+	board = place_next_tet(board);
+	while (baord != NULL)
+	{
+		solve(board);
+		board = translate_last_tet(board);
+	}
 }
+*/
 
 int			main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;
+	t_board				*board;
+	t_ets				*tets;
 
 	if(!(tet_codes = read_and_validate_tets(argc, argv)))
 	{
 		ft_putendl("Your shit sucks!");
 		return (-1);
 	}
-	solve(tet_codes);
+	tets = prepare_for_placement(tet_codes);
+	/*
+	board = generate_board(tets);
+	while(!(solve(board)))
+	{
+		board = expand_board(board);
+	};
+	*/
 	ft_putendl("It works");
 	return (0);
 }
