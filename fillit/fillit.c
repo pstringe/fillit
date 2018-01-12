@@ -138,11 +138,27 @@ int			solve(t_board *board)
 	}
 }
 */
+void		print_tet_set(t_ets *tetrs)
+{
+	int i;
+	ft_putstr("head:\t");
+	ft_putnbr(tetrs->head);
+	ft_putendl("\n");
+	ft_putstr("no_of_tets:\t");
+	ft_putnbr(tetrs->no_of_tets);
+	ft_putendl("\n");
+
+	i = -1;
+	while(tetrs->tets[++i])
+	{
+		print_encoded_tetromino(tetrs->tets[i]->value);
+	}
+}
 
 int			main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;
-	t_board				*board;
+	//t_board				*board;
 	t_ets				*tets;
 
 	if(!(tet_codes = read_and_validate_tets(argc, argv)))
@@ -151,6 +167,7 @@ int			main(int argc, char **argv)
 		return (-1);
 	}
 	tets = prepare_for_placement(tet_codes);
+	print_tet_set(tets);
 	/*
 	board = generate_board(tets);
 	while(!(solve(board)))

@@ -16,7 +16,7 @@ t_tet	*initialize_spatial_tet(unsigned short int code, int order)
 
 t_ets	*prepare_for_placement(unsigned short int *tet_codes)
 {
-	t_ets *tets;
+	t_ets *tetrs;
 	t_tet **spatial_tets;
 	
 	int	i;
