@@ -78,7 +78,7 @@ t_board		*board_alloc(int size, t_tet **tets)
 	while(++x < size)
 	{
 		y = -1;
-		while(++y < (size * size))
+		while(++y < size)
 		{
 			tmp = push_point_tail(board, tmp, x, y);
 		}
