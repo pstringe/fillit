@@ -31,10 +31,70 @@ int			solve(t_board *board)
 }
 */
 
-t_board		*generate_board(t_ets *tets, int expansion)
+int		*tet_to_board_space(int x, int y, int size)
 {
+	int	coord;
+	int	d;
+	int x;
+	int y;
+
+	coords = malloc(sizeof(int) * 2);
+	coords[0] = x;
+	coords[1] = y;
+
+	return(coord);
+}
+
+void	link(t_board *board, t_tet *tet)
+{
+	int		x;
+	int		y;
+	int		i;
+	int		j;
+	t_point	*tmp;
+
+	tmp = t_board->origin->next;
+	j = 16;
+	i = -1;
+	while (i < 4)
+	{
+		while (--j)
+		x = access_second_dimension(4, j)[0];
+		y = access_second_dimension(4, j)[1];
+		x = (tet->value & 1 << j) ? tet_to_board_space(x, y, board->size)[0]: -1; 
+		y = (tet->value & 1 << j) ? tet_to_board_space(x, y, board->size)[1]: -1;
+		while (tmp)
+		{
+			if (tmp->x == x && tmp->y == y)
+			{
+				tmp->parent = tet;
+				tet.attatch(tmp);
+			}
+			tmp = tmp->next;
+		}
+	}
+}
+
+void	combine(t_board board, int breadth, int depth)
+{
+	int		i;
+	t_tet	*tmp;
+
+	i = -1;
+	while(++i < depth)
+	{
+		tmp = board->tets[i];
+		link(board, tmp);
+	}
+	return(board);
+}
+
+t_board		*generate_board(t_ets *tets, int expansion, int breadth, int depth)
+{
+	int i;
 	t_board *board;
 	board = board_alloc(tets, expansion);
+	combine(board, breadth, depth);
 	return(board);
 }
 
