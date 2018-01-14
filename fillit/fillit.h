@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/12 03:37:44 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/14 11:11:20 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,28 @@ typedef struct		s_tetromino
 	struct s_grid_location	*fourth;
 }					t_tet;
 
+typedef struct		s_et
+{
+	int						head;
+	int						no_of_tets;
+	struct	s_tetromino		**tets;
+}					t_ets;
+
 typedef struct		s_board
 {
-	int						validity;
 	int						size;
-	struct s_tetromino		**tets;
+	int						depth;
+	int						breadth;
+	int						range;
+	struct s_et				*tets;
 	struct s_grid_location	*origin;
 }					t_board;
 
-t_tet				**prepare_for_placement(unsigned short int *tet_codes);
+
+t_board				*board_alloc(t_ets *tets, int exp);
+void				print_board(t_board *board);
+void				print_tet_set(t_ets *tetrs);
+t_ets				*prepare_for_placement(unsigned short int *tet_codes);
 t_tet				*initialize_spatial_tet(unsigned short int code, int order);
 int					error(int code);
 char				*validate_tetromino_set(char *unvalidated_tetromino_set);
