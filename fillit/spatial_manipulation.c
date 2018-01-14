@@ -1,6 +1,23 @@
 
 #include "fillit.h"
 
+void		print_tet_set(t_ets *tetrs)
+{
+	int i;
+	ft_putstr("head:\t");
+	ft_putnbr(tetrs->head);
+	ft_putendl("\n");
+	ft_putstr("no_of_tets:\t");
+	ft_putnbr(tetrs->no_of_tets);
+	ft_putendl("\n");
+
+	i = -1;
+	while(tetrs->tets[++i])
+	{
+		print_encoded_tetromino(tetrs->tets[i]->value);
+	}
+}
+
 t_tet	*initialize_spatial_tet(unsigned short int code, int order)
 {
 	t_tet	*tet;
