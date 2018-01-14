@@ -10,7 +10,8 @@ SRCS = fillit.c\
 	   validate_tetrominos.c\
 	   bitwise_encoder.c\
 	   spatial_manipulation.c\
-	   normalize_tetromino.c
+	   normalize_tetromino.c\
+	   board_generation.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 
