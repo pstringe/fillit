@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/14 11:11:20 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/14 20:25:06 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_grid_location
 	int						x;
 	int						y;
 	int						value;
-	int						parent;
+	struct s_tetromino		*parent;
 	struct s_grid_location	*prev;
 	struct s_grid_location	*next;
 	struct s_grid_location	*up;
