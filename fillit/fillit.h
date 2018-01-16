@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/14 20:25:06 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:03:51 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ typedef struct		s_board
 	struct s_grid_location	*origin;
 }					t_board;
 
-
 t_board				*board_alloc(t_ets *tets, int exp);
-void				print_board(t_board *board);
+void				print_board(t_board *board, int mode);
 void				print_tet_set(t_ets *tetrs);
 t_ets				*prepare_for_placement(unsigned short int *tet_codes);
 t_tet				*initialize_spatial_tet(unsigned short int code, int order);

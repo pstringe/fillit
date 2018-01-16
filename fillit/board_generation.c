@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 10:57:51 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/14 11:14:18 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:12:46 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		min_size_given(int n)
 	return (2);
 }
 
-void		print_board(t_board *board)
+void		print_board(t_board *board, int mode)
 {
 	int size;
 	int i;
@@ -46,13 +46,26 @@ void		print_board(t_board *board)
 	{
 		if(tmp->x >= 0 && tmp->x <= size)
 		{
-			ft_putchar('[');
-			ft_putnbr(tmp->x);
-			ft_putchar(',');
-			ft_putchar(' ');
-			ft_putnbr(tmp->y);
-			ft_putchar(']');
-
+			if (mode == 0)
+			{
+				ft_putchar('[');
+				ft_putnbr(tmp->x);
+				ft_putchar(',');
+				ft_putchar(' ');
+				ft_putnbr(tmp->y);
+				ft_putchar(']');
+			}
+			if (mode == 1)
+			{
+				if (tmp->parent)
+				{
+					ft_putchar(tmp->parent->order + 65);
+				}
+				else
+				{
+					ft_putchar('.');
+				}
+			}
 			if (i % size == 0 && i != 0 && i != size * size - 1)
 			{
 				ft_putchar('\n');

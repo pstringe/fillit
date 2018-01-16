@@ -79,17 +79,17 @@ void	combine(t_board *board, /*int breadth,*/ int depth)
 	i = -1;
 	while(++i < depth)
 	{
-		tmp = board->tets[i];
+		tmp = board->tets->tets[i];
 		ft_link(board, tmp);
 	}
 }
 
-t_board		*generate_board(t_ets *tets, int expansion, int breadth, int depth)
+t_board		*generate_board(t_ets *tets, int expansion, /*int breadth,*/ int depth)
 {
-	int i;
+	//int i;
 	t_board *board;
 	board = board_alloc(tets, expansion);
-	combine(board, breadth, depth);
+	combine(board, /*breadth,*/ depth);
 	return(board);
 }
 
@@ -105,8 +105,8 @@ int			main(int argc, char **argv)
 	}
 	tets = prepare_for_placement(tet_codes);
 	print_tet_set(tets);
-	board = generate_board(tets, 0);
-	print_board(board);
+	board = generate_board(tets, 0, 0);
+	print_board(board, 1);
 	/*
 	while(!(solve(board)))
 	{
