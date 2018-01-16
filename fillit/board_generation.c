@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 10:57:51 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/15 17:12:46 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:29:46 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_board		*board_alloc(t_ets *tets, int exp)
 	board = malloc(sizeof(t_board*));
 	board->origin = push_point_tail(board, NULL, 0, 0);
 	board->tets = tets;
+	board->expansion = exp;
 	board->size = min_size_given(tets->no_of_tets) + exp;
 	tmp = board->origin;
 

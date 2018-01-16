@@ -14,85 +14,37 @@
 /*
 int			solve(t_board *board)
 {
-	if (not_possible_solution(board))
+	if (reject(board))
 	{
-		return (NULL);
+		expand_board(board);
 	}
-	if (is_solution(board))
+	if (accept(board))
 	{
 		return (board);
 	}
-	board = place_next_tet(board);
-	while (baord != NULL)
+	board = first(board);
+	while (baord)
 	{
 		solve(board);
-		board = translate_last_tet(board);
+		board = next(board);
 	}
 }
 */
 
-int		*tet_to_board_space(int x, int y)
-{
-	int	*coords;
-
-	coords = malloc(sizeof(int) * 2);
-	coords[0] = x;
-	coords[1] = y;
-	return(coords);
-}
-
-void	ft_link(t_board *board, t_tet *tet)
-{
-	int		x;
-	int		y;
-	int		i;
-	int		j;
-	t_point	*tmp;
-
-	tmp = board->origin->next;
-	j = 16;
-	i = -1;
-	while (i < 4)
-	{
-		while (--j)
-		x = access_second_dimension(4, j)[0];
-		y = access_second_dimension(4, j)[1];
-		x = (tet->value & 1 << j) ? tet_to_board_space(x, y)[0]: -1; 
-		y = (tet->value & 1 << j) ? tet_to_board_space(x, y)[1]: -1;
-		while (tmp)
-		{
-			if (tmp->x == x && tmp->y == y)
-			{
-				tmp->parent = tet;
-				tmp->value = 1;
-			}
-			tmp = tmp->next;
-		}
-	}
-}
-
-void	combine(t_board *board, /*int breadth,*/ int depth)
-{
-	int		i;
-	t_tet	*tmp;
-
-	i = -1;
-	while(++i < depth)
-	{
-		tmp = board->tets->tets[i];
-		ft_link(board, tmp);
-	}
-}
-
-t_board		*generate_board(t_ets *tets, int expansion, /*int breadth,*/ int depth)
+t_board		*generate_board(t_ets *tets, int expansion)
 {
 	//int i;
 	t_board *board;
 	board = board_alloc(tets, expansion);
-	combine(board, /*breadth,*/ depth);
 	return(board);
 }
 
+t_board		*root(t_ets *tets)
+{
+	t_board *board;
+	board = generate_board(tets, 0);
+	return(board);
+}
 int			main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;
@@ -105,7 +57,7 @@ int			main(int argc, char **argv)
 	}
 	tets = prepare_for_placement(tet_codes);
 	print_tet_set(tets);
-	board = generate_board(tets, 0, 0);
+	board = root(tets);
 	print_board(board, 1);
 	/*
 	while(!(solve(board)))
