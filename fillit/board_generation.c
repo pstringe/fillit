@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 10:57:51 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/16 15:29:46 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/17 10:37:22 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,17 @@ void		print_board(t_board *board, int mode)
 	int i;
 	t_point *tmp;
 
+	if(!board)
+	{
+		return ;
+	}
+
 	size = board->size;
 	i = -1;
 	tmp = board->origin;
 	while (tmp && ++i <= (size * size))
 	{
-		if(tmp->x >= 0 && tmp->x <= size)
+		if((tmp->x >= 0 && tmp->x <= size) && (tmp->y >= 0 && tmp->y <= size))
 		{
 			if (mode == 0)
 			{

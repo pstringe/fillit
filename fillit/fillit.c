@@ -33,7 +33,8 @@ void		link_to_board(/*int x, int y,*/ t_board *board)
 	{
 		if (tet->value & (1 << i))
 		{
-			board->origin->next->value = 'A';
+			board->origin->next->parent = tet;
+			
 			/*link(find_mon(access_second_dimenion(4, i)[0], access_second_dimenion(4, i)[1]))*/;
 		}
 	}
@@ -157,7 +158,9 @@ int			main(int argc, char **argv)
 	tets = prepare_for_placement(tet_codes);
 	print_tet_set(tets);
 	board = root(tets);
-	print_board(board, 0);
+	print_board(board, 1);
+	print_board(solve(board), 1);
+
 	/*
 	while(!(solve(board)))
 	{
