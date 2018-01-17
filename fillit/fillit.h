@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/16 15:25:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/17 09:46:22 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_board
 	int						expansion;
 	int						depth;
 	int						breadth;
+	int						range;
 	struct s_et				*tets;
 	struct s_grid_location	*origin;
 }					t_board;
