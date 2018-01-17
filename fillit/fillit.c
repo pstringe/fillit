@@ -30,13 +30,14 @@ int			solve(t_board *board)
 	}
 }
 */
-
+/*expands board when possibilitie for last size have been exahsted*/
 t_board		*expand_board(t_board *board)
 {
 	board = generate_board(board->tets, board->expansion + 1);
 	return (board);
 }
 
+/*used to initiate expansion by determining wheather the curent state of the board can be completed to a solution*/
 int			*reject(t_board *board)
 {
 	int		spaces_left;
@@ -44,11 +45,13 @@ int			*reject(t_board *board)
 	return (spaces_left < board->tets->no_of_tets * 4);
 }
 
+/*used to determine of the current board is a solution to the problem*/
 int			*accept(t_board *board)
 {
 	return (head == board->tets->no_of_tets);
 }
 
+/*generates a blank board, based on a minimum size given the number of tets invloved, plus optional expansion for later calls*/
 t_board		*generate_board(t_ets *tets, int expansion)
 {
 	//int i;
@@ -57,6 +60,7 @@ t_board		*generate_board(t_ets *tets, int expansion)
 	return(board);
 }
 
+/*generates the root of the space of possible solutions*/
 t_board		*root(t_ets *tets)
 {
 	t_board *board;
@@ -64,6 +68,7 @@ t_board		*root(t_ets *tets)
 	return(board);
 }
 
+/*generates the next board by placing a new tetromino*/
 t_board		*first(t_board *board)
 {
 	if (board->tets->head = board->tets->no_of_tets)
@@ -76,6 +81,7 @@ t_board		*first(t_board *board)
 	}
 }
 
+/*generates a new board by translating the position of the tetromino currently in play*/
 t_board		*next(t_board *board)
 {
 	if (board->breadth == board->range) 
@@ -87,6 +93,7 @@ t_board		*next(t_board *board)
 		return (translate(board));
 	}
 }
+
 int			main(int argc, char **argv)
 {
 	unsigned short int	*tet_codes;
