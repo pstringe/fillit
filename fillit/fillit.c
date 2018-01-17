@@ -30,6 +30,38 @@ int			solve(t_board *board)
 	}
 }
 */
+int			*is_valid(t_board board, unsigned short int *region)
+{
+	int valid;
+	t_tet *tet; 
+	tet = board->tets->tets[board->head];
+	if(valid = in_range(board, region[1], region[2]) && match(tet, region))
+	{
+		
+	} 
+	return (valid);
+}
+
+t_board		*place(t_board *board)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while(++i)
+	{
+		j = -1;
+		while(++j)
+		{
+			if (is_valid(board, encode_region(i, j)))
+			{
+				link_to_board(i,j, board->tets->tets[board->head]);
+			}
+		}
+	}
+	return (board);
+}
+
 /*expands board when possibilitie for last size have been exahsted*/
 t_board		*expand_board(t_board *board)
 {
