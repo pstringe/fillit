@@ -23,13 +23,31 @@ int			solve(t_board *board)
 		return (board);
 	}
 	board = first(board);
-	while (baord)
+	while (board)
 	{
 		solve(board);
 		board = next(board);
 	}
 }
 */
+
+t_board		*expand_board(t_board *board)
+{
+	board = generate_board(board->tets, board->expansion + 1);
+	return (board);
+}
+
+int			*reject(t_board *board)
+{
+	int		spaces_left;
+	spaces_left = board->tets->no_of_tets * 4 - board->tets->head * 4;
+	return (spaces_left < board->tets->no_of_tets * 4);
+}
+
+int			*accept(t_board *board)
+{
+	return (head == board->tets->no_of_tets);
+}
 
 t_board		*generate_board(t_ets *tets, int expansion)
 {
@@ -44,6 +62,30 @@ t_board		*root(t_ets *tets)
 	t_board *board;
 	board = generate_board(tets, 0);
 	return(board);
+}
+
+t_board		*first(t_board *board)
+{
+	if (board->tets->head = board->tets->no_of_tets)
+	{
+		return (NULL);
+	}
+	else
+	{
+		return(place(board));
+	}
+}
+
+t_board		*next(t_board *board)
+{
+	if (board->breadth == board->range) 
+	{
+		return (NULL);
+	}
+	else
+	{
+		return (translate(board));
+	}
 }
 int			main(int argc, char **argv)
 {
