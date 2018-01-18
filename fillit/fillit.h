@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/02 16:16:59 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/08 14:15:20 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ int		access_first_dimension(int rowlen, int y, int x);
 int		*access_second_dimension(int rowlen, int i);
 char	**validate_tetrominos(char **tetrominos);
 char	**normalize_tetrominos(char **tetrominos);
+void	solver(char **tetrominos);
 #endif

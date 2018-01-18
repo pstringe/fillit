@@ -8,7 +8,8 @@ SRCS = fillit.c\
 	   label_tetrominos.c\
 	   dimensional_access.c\
 	   validate_tetrominos.c\
-	   normalize_tetromino.c
+	   normalize_tetromino.c\
+		 solver.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 

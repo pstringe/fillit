@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/02 17:43:43 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/17 13:08:26 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		main(int argc, char **argv)
 	tetrominos = validate_tetrominos(tetrominos);
 	// normalize_tetrominos moves all tetrominos to top left corner
 	normalize_tetrominos(tetrominos);
+	// ft_putstr(tetrominos[0]);
+	solver(tetrominos);
 	if(!tetrominos)
 	{
 		return(error(-8));
