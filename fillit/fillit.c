@@ -80,28 +80,50 @@ void	print_board(char **board)
 	}
 }
 
-char	**place_tet(char **board, char *tet, int x, int y, int size)
+void	clear_board(char **board)
 {
 	int i;
 	int j;
 
+	i = -1;
+	while (board[++i])
+	{
+		j = -1;
+		while (board[++j])
+		{
+			board[i][j] = '.';
+		}
+	} 
+}
+char	**place_tet(char **board, char *tet, int x, int y, int size)
+{
+	int i;
+	int j;
+	int invalid_placement;
+
+	invalid_placement = 0;
 	i = 0;
-	while (i < 4 && x + i < size)
+	while (i < 4 && !invalid_placement)
 	{
 		j = 0;
-		while (j < 4 && y + j < size)
+		while (j < 4 && !invalid_placement)
 		{
 			if (board[x + i][y + j] == '.')
 			{
 				board[x + i][y + j] = tet[access_first_dimension(4, i, j)];
 				j++;
+				invalid_placement = (y + j == size) ? 1 : 0;
 			}
 			else
 			{
-				return (NULL);
+				invalid_placement = 1;
 			}
 		}
 		i++;
+		if ((invalid_placement = (x + i == size) ? 1 : 0))
+		{
+			clear_board(board);
+		}
 	} 
 	return (board);
 }
