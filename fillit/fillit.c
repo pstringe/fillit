@@ -80,16 +80,16 @@ void	print_board(char **board)
 	}
 }
 
-char	**place_tet(char **board, char *tet, int x, int y)
+char	**place_tet(char **board, char *tet, int x, int y, int size)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < 4)
+	while (i < 4 && x + i < size)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < 4 && y + j < size)
 		{
 			if (board[x + i][y + j] == '.')
 			{
@@ -132,7 +132,7 @@ int		main(int argc, char **argv)
 	no_of_tets = tet_no(tetrominos);
 	board = generate_board(no_of_tets);
 	print_board(board);
-	board = place_tet(board, *tetrominos, 0, 0);
+	board = place_tet(board, *tetrominos, 0, 0, calc_minsize(no_of_tets));
 	print_board(board);
 	return (0);
 }
