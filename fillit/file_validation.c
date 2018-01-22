@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 13:18:03 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/18 10:42:08 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/22 11:43:48 by ralee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static  int is_valid_filesize(char *unvalidated_tetromino_set)
         filesize = counter + 1;
     }
     filesize++;
-    if((filesize - 20) % 21 == 0 && filesize <= (25 * 21) + 20)
+    if(filesize % 21 == 0 && filesize <= 26 * 21)
     {
         return (1);
     }
