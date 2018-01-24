@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/18 11:39:59 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/23 17:25:42 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,33 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 
 	return (tetrominos);
 }
+
+t_et	*make_tet(char *tet_array)
+{
+	t_et *tet;
+
+	tet = malloc(sizeof(tet));
+	tet->value = tet_array;
+	tet->placed = 0;
+	tet->next = NULL;
+	return (tet);
+}
+
+t_et	*get_set(char **tetrominos)
+{	
+	int	i;
+	t_et *set;
+	t_et *tmp;
+
+	i = 0;
+	set = make_tet(*tetrominos);
+	tmp = set;
+	while (tetrominos[++i])
+	{
+		tmp->next = make_tet(tetrominos[i]);
+		tmp = tmp->next;
+	}
+	return(set);
+}
+
+

@@ -6,12 +6,11 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/20 15:39:56 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/23 17:42:10 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
 int		int_sqrt(int y, int x)
 {
 	if ( y * y >= x)
@@ -23,7 +22,6 @@ int		int_sqrt(int y, int x)
 		return (int_sqrt(++y, x));
 	}
 }
-
 int		calc_minsize(int n)
 {
 	if(n != 1)
@@ -32,7 +30,6 @@ int		calc_minsize(int n)
 	}
 	return (2);
 }
-
 int		tet_no(char **tets)
 {
 	int n;
@@ -45,13 +42,16 @@ int		tet_no(char **tets)
 	return (n);
 }
 
-char 	**generate_board(int no_of_tets)
+t_board		*generate_board(int no_of_tets, t_et *tets)
 {
-	int min_size = calc_minsize(no_of_tets);
-	char **board;
-	int i;
-	int j;
+	t_board	*board_struct;	
+	int 	min_size;
+	char	**board;
+	int		i;
+	int		j;
 
+	min_size = calc_minsize(no_of_tets);
+	board_struct = malloc(sizeof(t_board));
 	board = malloc(sizeof(char*) * min_size + 1);
 	i = 0;
 	while (i < min_size)
@@ -67,8 +67,11 @@ char 	**generate_board(int no_of_tets)
 		i++;
 	}
 	board[i] = NULL;
+	board_struct->size = min_size;
+	board_struct->stack = tets;
+	board_struct->map = board;
 
-	return(board);
+	return(board_struct);
 }
 
 void	print_board(char **board)
@@ -80,6 +83,7 @@ void	print_board(char **board)
 	}
 }
 
+/*
 char	**place_tet(char **board, char *tet, int x, int y, int size)
 {
 	int i;
@@ -91,29 +95,30 @@ char	**place_tet(char **board, char *tet, int x, int y, int size)
 		j = 0;
 		while (j < 4 && y + j < size)
 		{
+			if (!board[x + i][y + i])
+			{
+				clear_board(board);
+				return (NULL);
+			}
 			if (board[x + i][y + j] == '.')
 			{
 				board[x + i][y + j] = tet[access_first_dimension(4, i, j)];
 				j++;
-			}
-			else
-			{
-				return (NULL);
 			}
 		}
 		i++;
 	} 
 	return (board);
 }
-
+*/
 int		main(int argc, char **argv)
 {
 	int 	no_of_tets;
 	char 	*unvalidated_tetromino_set;
 	char	*valid_tetromino_set;
 	char	**tetrominos;
-	char	**board;
-
+	t_board	*board;
+	t_et	*set;
 	if(argc != 2)
 	{
 		return (error(-6));
@@ -130,9 +135,17 @@ int		main(int argc, char **argv)
 	// normalize_tetrominos moves all tetrominos to top left corner
 	normalize_tetrominos(tetrominos);
 	no_of_tets = tet_no(tetrominos);
-	board = generate_board(no_of_tets);
-	print_board(board);
+	set = get_set(tetrominos);
+	while(set)
+	{
+		ft_putendl(set->value);
+		set = set->next;
+	}
+	board = generate_board(no_of_tets, set);
+	print_board(board->map);
+	/*
 	board = place_tet(board, *tetrominos, 0, 0, calc_minsize(no_of_tets));
 	print_board(board);
+	*/
 	return (0);
 }
