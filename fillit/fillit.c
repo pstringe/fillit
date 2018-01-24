@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/23 19:47:29 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/24 11:45:45 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,26 @@ t_et	*get_next_tet(t_et *tets)
 	tet = tmp;
 	return (tet);
 }
-/*
+
 void	clear_board(t_board *board)
 {
 	int i;
 	int j;
-	while(board->map[i])
+
+	i = -1;
+	while(board->map[++i])
 	{
 		j = -1;
-		while (board->map[j])
+		while (board->map[++j])
 		{
-			if(board->tets)
-			board->map[i][j]
+			if (board->map[i][j] == get_next_tet(board->stack)->label)
+			{
+				board->map[i][j] = '.';
+			}
 		}
 	}
 }
-*/
+
 t_board		*place_tet(t_board *board, int x, int y)
 {
 	int i;
@@ -120,14 +124,15 @@ t_board		*place_tet(t_board *board, int x, int y)
 
 	tet = get_next_tet(board->stack);
 	i = 0;
-	while (i < 4 && x + i < board->size)
+	while (i < 4 && x + i <= board->size)
 	{
 		j = 0;
-		while (j < 4 && y + j < board->size)
+		while (j < 4 && y + j <= board->size)
 		{
-			if (!board->map[x + i][y + i])
+			if (x + i == board->size || y + j == board->size)
 			{
-				//clear_board(board->map);
+				ft_putendl("the clearing condition executed");
+				clear_board(board);
 				return (NULL);
 			}
 			if (board->map[x + i][y + j] == '.')
@@ -136,6 +141,7 @@ t_board		*place_tet(t_board *board, int x, int y)
 				j++;
 			}
 		}
+		tet->placed = 1;
 		i++;
 	} 
 	return (board);

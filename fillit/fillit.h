@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/23 17:26:47 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/24 11:32:18 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct	s_et
 {
+	char			label;
 	int				placed;
 	char			*value;
 	struct	s_et	*next;
@@ -29,7 +30,7 @@ typedef struct	s_board
 	struct s_et		*stack;
 	char			**map;
 }				t_board;
-t_et	*make_tet(char *tet_array);
+t_et	*make_tet(char *tet_array, int order);
 t_et	*get_set(char **tetrominos);
 char	*read_tetromino_set(char *file);
 int		error(int code);
