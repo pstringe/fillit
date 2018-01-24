@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/23 17:42:10 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/23 19:47:29 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,56 @@ void	print_board(char **board)
 	}
 }
 
+t_et	*get_next_tet(t_et *tets)
+{
+	t_et	*tet = malloc(sizeof(t_et));
+	t_et	*tmp;
+
+	tmp = tets;
+	while (tmp->placed)
+	{
+		tmp = tmp->next;
+	}
+	tet = tmp;
+	return (tet);
+}
 /*
-char	**place_tet(char **board, char *tet, int x, int y, int size)
+void	clear_board(t_board *board)
 {
 	int i;
 	int j;
+	while(board->map[i])
+	{
+		j = -1;
+		while (board->map[j])
+		{
+			if(board->tets)
+			board->map[i][j]
+		}
+	}
+}
+*/
+t_board		*place_tet(t_board *board, int x, int y)
+{
+	int i;
+	int j;
+	t_et *tet;
 
+	tet = get_next_tet(board->stack);
 	i = 0;
-	while (i < 4 && x + i < size)
+	while (i < 4 && x + i < board->size)
 	{
 		j = 0;
-		while (j < 4 && y + j < size)
+		while (j < 4 && y + j < board->size)
 		{
-			if (!board[x + i][y + i])
+			if (!board->map[x + i][y + i])
 			{
-				clear_board(board);
+				//clear_board(board->map);
 				return (NULL);
 			}
-			if (board[x + i][y + j] == '.')
+			if (board->map[x + i][y + j] == '.')
 			{
-				board[x + i][y + j] = tet[access_first_dimension(4, i, j)];
+				board->map[x + i][y + j] = tet->value[access_first_dimension(4, i, j)];
 				j++;
 			}
 		}
@@ -110,7 +140,7 @@ char	**place_tet(char **board, char *tet, int x, int y, int size)
 	} 
 	return (board);
 }
-*/
+
 int		main(int argc, char **argv)
 {
 	int 	no_of_tets;
@@ -130,22 +160,13 @@ int		main(int argc, char **argv)
 		return(error(-5));
 	}
 	tetrominos = get_individual_tetrominos(valid_tetromino_set);
-	/*validate the tetrominos according to number of omminos and connections*/
 	tetrominos = validate_tetrominos(tetrominos);
-	// normalize_tetrominos moves all tetrominos to top left corner
 	normalize_tetrominos(tetrominos);
 	no_of_tets = tet_no(tetrominos);
 	set = get_set(tetrominos);
-	while(set)
-	{
-		ft_putendl(set->value);
-		set = set->next;
-	}
 	board = generate_board(no_of_tets, set);
 	print_board(board->map);
-	/*
-	board = place_tet(board, *tetrominos, 0, 0, calc_minsize(no_of_tets));
-	print_board(board);
-	*/
+	board = place_tet(board, 0, 0);
+	print_board(board->map);
 	return (0);
 }
