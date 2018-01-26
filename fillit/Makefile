@@ -1,14 +1,7 @@
 CC = gcc
 INC = ../libft
 NAME = fillit
-SRCS = fillit.c\
-	   error.c\
-	   read_tetromino_set.c\
-	   file_validation.c\
-	   label_tetrominos.c\
-	   dimensional_access.c\
-	   validate_tetrominos.c\
-	   normalize_tetromino.c
+SRCS = *.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 
