@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 19:03:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/26 19:15:51 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,28 @@ void	clear_board(t_board *board)
 	}
 }
 
+int			try_tet(t_board *board, int x, int y)
+{
+	int 	i;
+	int 	j;
+	t_et	*tet;
+
+	tet = get_next_tet(board->stack);
+	i = -1;
+	while(++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			if(x + i >= board->size || y + j >= board->size)
+			{
+				return (0);
+			}
+		}
+	}
+	return (1);
+}
+
 t_board		*place_tet(t_board *board, int x, int y)
 {
 	int i;
@@ -147,7 +169,17 @@ int		main(int argc, char **argv)
 	}
 	board = read_and_validate(argv[1]);
 	print_board(board->map);
+	if (try_tet(board, 0, 0))
+	{
+		place_tet(board, 0, 0);
+	}
+	else
+	{
+		ft_putendl("Shit don't fit!");
+	}
+	/*
 	board = place_tet(board, 0, 0);
 	print_board(board->map);
+	*/
 	return (0);
 }
