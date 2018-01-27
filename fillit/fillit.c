@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 20:10:07 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/26 21:26:18 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,15 @@ void	print_board(char **board)
 
 t_et	*get_next_tet(t_et *tets)
 {
-	t_et	*tet = malloc(sizeof(t_et));
 	t_et	*tmp;
-
+	
+	tmp = malloc(sizeof(t_et));
 	tmp = tets;
 	while (tmp->placed)
 	{
 		tmp = tmp->next;
 	}
-	tet = tmp;
-	return (tet);
+	return (tmp);
 }
 
 void	clear_board(t_board *board)
@@ -145,12 +144,14 @@ t_board		*place_tet(t_board *board, int x, int y)
 		{
 			if ((tet->value)[access_first_dimension(4, i, j)] != '.')
 			{
+				/*
 				if (x + i == board->size || y + j == board->size)
 				{
 					ft_putendl("the clearing condition executed");
 					clear_board(board);
 					return (NULL);
 				}
+				*/
 				if (board->map[x + i][y + j] == '.')
 				{
 					board->map[x + i][y + j] = tet->value[access_first_dimension(4, i, j)];
@@ -163,6 +164,45 @@ t_board		*place_tet(t_board *board, int x, int y)
 	tet->placed = 1;
 	return (board);
 }
+t_board		*place_the_next_motherfucking_tet(t_board *board)
+{
+	int 	x;
+	int 	y;
+	t_et	*tet;
+
+	tet = get_next_tet(board->stack);
+	while(!tet->placed)
+	{
+		y = -1;
+		while (++y < board->size)
+		{
+			x = -1;
+			while (++x < board->size)
+			{
+				if (try_tet(board, x, y))
+				{
+					place_tet(board, x, y);
+					return (board);
+				}
+				else
+				{
+					ft_putendl("Shit don't fit!");
+					return (NULL);
+				}
+			}
+		}
+	}
+	return (NULL);
+}
+
+t_board		*solve(t_board *board)
+{	
+	if (place_the_next_motherfucking_tet(board))
+	{
+		print_board(board->map);
+	}
+	return(board);
+}
 int		main(int argc, char **argv)
 {
 	t_board	*board;
@@ -173,18 +213,7 @@ int		main(int argc, char **argv)
 	}
 	board = read_and_validate(argv[1]);
 	print_board(board->map);
-	if (try_tet(board, 0, 0))
-	{
-		place_tet(board, 0, 0);
-		print_board(board->map); 
-	}
-	else
-	{
-		ft_putendl("Shit don't fit!");
-	}
-	/*
-	board = place_tet(board, 0, 0);
+	board = solve(board);
 	print_board(board->map);
-	*/
 	return (0);
 }
