@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 19:15:51 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/26 20:10:07 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,9 @@ int			try_tet(t_board *board, int x, int y)
 		j = -1;
 		while (++j < 4)
 		{
-			if(x + i >= board->size || y + j >= board->size)
+			if((tet->value)[access_first_dimension(4, i, j)] != '.' 
+			&& (x + i >= board->size 
+			|| y + j >= board->size))
 			{
 				return (0);
 			}
@@ -141,24 +143,26 @@ t_board		*place_tet(t_board *board, int x, int y)
 		j = 0;
 		while (j < 4 && y + j <= board->size)
 		{
-			if (x + i == board->size || y + j == board->size)
+			if ((tet->value)[access_first_dimension(4, i, j)] != '.')
 			{
-				ft_putendl("the clearing condition executed");
-				clear_board(board);
-				return (NULL);
+				if (x + i == board->size || y + j == board->size)
+				{
+					ft_putendl("the clearing condition executed");
+					clear_board(board);
+					return (NULL);
+				}
+				if (board->map[x + i][y + j] == '.')
+				{
+					board->map[x + i][y + j] = tet->value[access_first_dimension(4, i, j)];
+				}
 			}
-			if (board->map[x + i][y + j] == '.')
-			{
-				board->map[x + i][y + j] = tet->value[access_first_dimension(4, i, j)];
-				j++;
-			}
+			j++;	
 		}
-		tet->placed = 1;
-		i++;
-	} 
+		i++;	
+	}
+	tet->placed = 1;
 	return (board);
 }
-
 int		main(int argc, char **argv)
 {
 	t_board	*board;
@@ -172,6 +176,7 @@ int		main(int argc, char **argv)
 	if (try_tet(board, 0, 0))
 	{
 		place_tet(board, 0, 0);
+		print_board(board->map); 
 	}
 	else
 	{
