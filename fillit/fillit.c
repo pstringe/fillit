@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/24 11:45:45 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/26 19:03:11 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,7 @@ int		calc_minsize(int n)
 	}
 	return (2);
 }
-int		tet_no(char **tets)
-{
-	int n;
 
-	n = 0;
-	while (*(tets + n))
-	{
-		n++;
-	}
-	return (n);
-}
 
 t_board		*generate_board(int no_of_tets, t_et *tets)
 {
@@ -149,28 +139,13 @@ t_board		*place_tet(t_board *board, int x, int y)
 
 int		main(int argc, char **argv)
 {
-	int 	no_of_tets;
-	char 	*unvalidated_tetromino_set;
-	char	*valid_tetromino_set;
-	char	**tetrominos;
 	t_board	*board;
-	t_et	*set;
+	
 	if(argc != 2)
 	{
 		return (error(-6));
 	}
-	unvalidated_tetromino_set = read_tetromino_set(argv[1]);
-	valid_tetromino_set = validate_tetromino_set(unvalidated_tetromino_set);
-	if(!valid_tetromino_set)
-	{
-		return(error(-5));
-	}
-	tetrominos = get_individual_tetrominos(valid_tetromino_set);
-	tetrominos = validate_tetrominos(tetrominos);
-	normalize_tetrominos(tetrominos);
-	no_of_tets = tet_no(tetrominos);
-	set = get_set(tetrominos);
-	board = generate_board(no_of_tets, set);
+	board = read_and_validate(argv[1]);
 	print_board(board->map);
 	board = place_tet(board, 0, 0);
 	print_board(board->map);
