@@ -6,12 +6,11 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/20 15:39:56 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/29 10:41:36 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
 int		int_sqrt(int y, int x)
 {
 	if ( y * y >= x)
@@ -23,7 +22,6 @@ int		int_sqrt(int y, int x)
 		return (int_sqrt(++y, x));
 	}
 }
-
 int		calc_minsize(int n)
 {
 	if(n != 1)
@@ -33,25 +31,17 @@ int		calc_minsize(int n)
 	return (2);
 }
 
-int		tet_no(char **tets)
+
+t_board		*generate_board(int no_of_tets, t_et *tets)
 {
-	int n;
+	t_board	*board_struct;	
+	int 	min_size;
+	char	**board;
+	int		i;
+	int		j;
 
-	n = 0;
-	while (*(tets + n))
-	{
-		n++;
-	}
-	return (n);
-}
-
-char 	**generate_board(int no_of_tets)
-{
-	int min_size = calc_minsize(no_of_tets);
-	char **board;
-	int i;
-	int j;
-
+	min_size = calc_minsize(no_of_tets);
+	board_struct = malloc(sizeof(t_board));
 	board = malloc(sizeof(char*) * min_size + 1);
 	i = 0;
 	while (i < min_size)
@@ -67,8 +57,11 @@ char 	**generate_board(int no_of_tets)
 		i++;
 	}
 	board[i] = NULL;
+	board_struct->size = min_size;
+	board_struct->stack = tets;
+	board_struct->map = board;
 
-	return(board);
+	return(board_struct);
 }
 
 void	print_board(char **board)
@@ -80,81 +73,148 @@ void	print_board(char **board)
 	}
 }
 
-void	clear_board(char **board)
+t_et	*get_next_tet(t_et *tets)
+{
+	t_et	*tmp;
+	
+	tmp = malloc(sizeof(t_et));
+	tmp = tets;
+	while (tmp->placed)
+	{
+		tmp = tmp->next;
+	}
+	return (tmp);
+}
+
+void	clear_board(t_board *board)
 {
 	int i;
 	int j;
 
 	i = -1;
-	while (board[++i])
+	while(board->map[++i])
 	{
 		j = -1;
-		while (board[++j])
+		while (board->map[++j])
 		{
-			board[i][j] = '.';
+			if (board->map[i][j] == get_next_tet(board->stack)->label)
+			{
+				board->map[i][j] = '.';
+			}
 		}
-	} 
+	}
 }
-char	**place_tet(char **board, char *tet, int x, int y, int size)
+
+int			try_tet(t_board *board, int x, int y)
+{
+	int 	i;
+	int 	j;
+	t_et	*tet;
+
+	tet = get_next_tet(board->stack);
+	i = -1;
+	while(++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			if((tet->value)[access_first_dimension(4, i, j)] != '.' 
+			&& (x + i >= board->size 
+			|| y + j >= board->size))
+			{
+				return (0);
+			}
+		}
+	}
+	return (1);
+}
+
+t_board		*place_tet(t_board *board, int x, int y)
 {
 	int i;
 	int j;
-	int invalid_placement;
+	t_et *tet;
 
-	invalid_placement = 0;
+	tet = get_next_tet(board->stack);
 	i = 0;
-	while (i < 4 && !invalid_placement)
+	while (i < 4 && x + i <= board->size)
 	{
 		j = 0;
-		while (j < 4 && !invalid_placement)
+		while (j < 4 && y + j <= board->size)
 		{
-			if (board[x + i][y + j] == '.')
+			if ((tet->value)[access_first_dimension(4, i, j)] != '.')
 			{
-				board[x + i][y + j] = tet[access_first_dimension(4, i, j)];
-				j++;
-				invalid_placement = (y + j == size) ? 1 : 0;
+				/*
+				if (x + i == board->size || y + j == board->size)
+				{
+					ft_putendl("the clearing condition executed");
+					clear_board(board);
+					return (NULL);
+				}
+				*/
+				if (board->map[x + i][y + j] == '.')
+				{
+					board->map[x + i][y + j] = tet->value[access_first_dimension(4, i, j)];
+				}
 			}
-			else
-			{
-				invalid_placement = 1;
-			}
+			j++;	
 		}
-		i++;
-		if ((invalid_placement = (x + i == size) ? 1 : 0))
-		{
-			clear_board(board);
-		}
-	} 
+		i++;	
+	}
+	tet->placed = 1;
 	return (board);
+}
+t_board		*place_the_next_motherfucking_tet(t_board *board)
+{
+	int 	x;
+	int 	y;
+	t_et	*tet;
+
+	tet = get_next_tet(board->stack);
+	while(!tet->placed)
+	{
+		y = -1;
+		while (++y < board->size)
+		{
+			x = -1;
+			while (++x < board->size)
+			{
+				if (try_tet(board, x, y))
+				{
+					place_tet(board, x, y);
+					return (board);
+				}
+				else
+				{
+					ft_putendl("Shit don't fit!");
+					return (NULL);
+				}
+			}
+		}
+	}
+	return (NULL);
+}
+
+t_board		*solve(t_board *board)
+{	
+	if (place_the_next_motherfucking_tet(board))
+	{
+		print_board(board->map);
+	}
+	return(board);
 }
 
 int		main(int argc, char **argv)
 {
-	int 	no_of_tets;
-	char 	*unvalidated_tetromino_set;
-	char	*valid_tetromino_set;
-	char	**tetrominos;
-	char	**board;
-
+	t_board	*board;
+	
 	if(argc != 2)
 	{
 		return (error(-6));
 	}
-	unvalidated_tetromino_set = read_tetromino_set(argv[1]);
-	valid_tetromino_set = validate_tetromino_set(unvalidated_tetromino_set);
-	if(!valid_tetromino_set)
-	{
-		return(error(-5));
-	}
-	tetrominos = get_individual_tetrominos(valid_tetromino_set);
-	/*validate the tetrominos according to number of omminos and connections*/
-	tetrominos = validate_tetrominos(tetrominos);
-	// normalize_tetrominos moves all tetrominos to top left corner
-	normalize_tetrominos(tetrominos);
-	no_of_tets = tet_no(tetrominos);
-	board = generate_board(no_of_tets);
-	print_board(board);
-	board = place_tet(board, *tetrominos, 0, 0, calc_minsize(no_of_tets));
-	print_board(board);
+	board = read_and_validate(argv[1]);
+	print_board(board->map);
+	board = solve(board);
+	print_board(board->map);
 	return (0);
 }
