@@ -6,11 +6,21 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/30 17:32:25 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/30 18:29:21 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+t_loc	*create_location(int x, int y)
+{
+	t_loc	*location;
+	location = ft_memalloc(sizeof(t_loc));
+	location->x = x;
+	location->y = y;
+	return (location);
+}
+
 int		int_sqrt(int y, int x)
 {
 	if ( y * y >= x)

@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/29 16:33:59 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/30 18:19:27 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef struct	s_board
 	struct s_et		*stack;
 	char			**map;
 }				t_board;
+
+typedef struct	s_location
+{
+	int		x;
+	int		y;
+}				t_loc;
 
 t_board		*generate_board(int no_of_tets, t_et *tets, int exp);
 int		tet_no(char **tets);
