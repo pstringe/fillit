@@ -6,52 +6,38 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/31 07:44:22 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/31 09:05:34 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static char *get_tetromino(char **rows, int order)
+static char *get_tetromino(char *rows, int order)
 {
-	int i;
-	int j;
-	int z;
+	int		i;
+	t_loc	*upper_bounds;
+	t_loc	*lower_bounds;
+	char 	**value;
+	t_et	*tetromino;
 
-	char *tetromino;
-	
-	if(!(tetromino = (char *)malloc(17)))
+	lower_bounds = new_loc(3, 3);
+	upper_bounds = new_loc(0, 0);
+	bounds(rows, lower_bounds, upper_bounds);
+	value = ft_memalloc(sizeof(char *) * (upper_bounds->y - lower_bounds->y + 1));
+
+	i = -1;
+	while (++i < upper_bounds->y - lower_bounds->y + 1)
 	{
-		error(-7);
-		return (NULL);
+		rows[i] = ft_strnew(upper_bounds->x, lower_bounds->x + 1);
+		ft_strncpy(pos[i], rows + (lower_bounds->x) + (i + lower_bounds->y) * 5, upper_bounds->x - lower_bounds-x + 1);
+
 	}
-	i = 0;
-	j = 0;
-	while (i < 4)
-	{
-		while(j < 5)
-		{	
-			z = access_first_dimension(4, i, j);
-			if (rows[i + (order * 4)][j] == '.')
-			{
-				tetromino[z] = rows[i + (order * 4)][j];
-			}
-			else if(rows[i + (order * 4)][j] == '#')
-			{
-				tetromino[z] = rows[i + (order * 4)][j] + (30 + order);
-			}
-			else if(z == 4)
-			{
-				tetromino[z] = '\0';
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
+	tetromino = make_tet(rows, upper_bounds->x - lower_bounds->x, upper_bounds->y - lower_bounds->y + 1);
+	ft_memdel((void **)&lower_bounds);
+	ft_memdel((void **)&upper_bounds);
 	return (tetromino);
 }
-
+/*
 int			get_number_of_tetrominos(char *tetromino_set)
 {
 	int tetrominos;
@@ -82,7 +68,7 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 
 	return (tetrominos);
 }
-
+*/
 t_et	*make_tet(char **tet_array, int x_diff, y_diff, char label)
 {
 	t_et *tet;
@@ -94,7 +80,7 @@ t_et	*make_tet(char **tet_array, int x_diff, y_diff, char label)
 	tet->y_diff = y_diff;
 	return (tet);
 }
-
+/*
 t_et	*get_set(char **tetrominos)
 {	
 	int	i;
@@ -111,7 +97,7 @@ t_et	*get_set(char **tetrominos)
 	}
 	return(set);
 }
-
+*/
 void	bounds(char *str, t_loc *min, t_loc *max)
 {
 	int i;
