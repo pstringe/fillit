@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 20:36:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/31 07:29:02 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,31 @@ t_et	*get_set(char **tetrominos)
 	return(set);
 }
 
+void	bounds(char *str, t_loc *min, t_loc *max)
+{
+	int i;
 
+	i = -1;
+	while (i < 20)
+	{
+		if (str[++i] == '#') 
+		{
+			if (i / 5 < min->y)
+			{
+				min->y = i / 5;
+			}
+			if (i / 5 > max->y)
+			{
+				max->y = i / 5;
+			}
+			if (i / 5 < min->x)
+			{
+				max->x = i % 5;
+			}
+			if (i % 5 > max->x)
+			{
+				max->x = i % 5;
+			}
+		}
+	}
+}
