@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 20:00:45 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/01 15:45:04 by ralee            ###   ########.fr       */
+/*   Updated: 2018/01/30 17:31:41 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		has_valid_number_of_monominos(char *tetromino)
 	}
 	return (0);
 }
-
+/*
 static int		is_neighbor(char *tetromino, int i)
 {
 	if (!(tetromino + i))
@@ -47,6 +47,8 @@ static int		is_neighbor(char *tetromino, int i)
 	}
 	return (0);
 }
+*/
+/*
 static int		get_number_of_neighbors(char *tetromino, int i)
 {
 	int *coords;
@@ -67,7 +69,6 @@ static int		get_number_of_neighbors(char *tetromino, int i)
 	up = access_first_dimension(4, y - 1, x);
 	down = access_first_dimension(4, y + 1, x);
 	neighbors = 0;
-	/*check surrounding indecies right*/
 	if (is_neighbor(tetromino, right))
 	{
 		neighbors++;
@@ -86,6 +87,7 @@ static int		get_number_of_neighbors(char *tetromino, int i)
 	}
 	return (neighbors);
 }
+*/
 
 static int		has_valid_number_of_connections(char *tetromino)
 {
@@ -100,20 +102,27 @@ static int		has_valid_number_of_connections(char *tetromino)
 	neighbors = 0;
 	while (tetromino[++i])
 	{
-		if(neighbors >= 6)
+		if (tetromino[i] != '.')
 		{
-			return (1);
-		}
-		else if (tetromino[i] != '.')
-		{
-			neighbors += get_number_of_neighbors(tetromino, i);
+			if ((i + 1) < 20 && tetromino[i + 1] != '.')
+			{
+				neighbors++;
+			}
+			if ((i - 1) >= 0 && tetromino[i + 1] != '.')
+			{
+				neighbors++;
+			}
+			if ((i + 5) < 20 && tetromino[i + 5] != '.')
+			{
+				neighbors++;
+			}
+			if ((i - 5) >= 0 && tetromino[i - 5] != '.')
+			{
+				neighbors++;
+			}
 		}
 	}
-	if (neighbors >= 6)
-	{
-		return(1);
-	}
-	return (error(-9));
+	return	(neighbors == 6 || neighbors == 8);
 }
 
 static int		is_valid_tetromino (char *tetromino)

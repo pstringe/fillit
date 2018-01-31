@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 21:20:45 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:33:59 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ typedef struct	s_et
 typedef struct	s_board
 {
 	int				size;
+	int				exp;
 	struct s_et		*stack;
 	char			**map;
 }				t_board;
 
-t_board		*generate_board(int no_of_tets, t_et *tets);
+t_board		*generate_board(int no_of_tets, t_et *tets, int exp);
 int		tet_no(char **tets);
 t_board	*read_and_validate(char *file);
 t_et	*make_tet(char *tet_array, int order);

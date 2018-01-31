@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 10:57:48 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 19:00:43 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:29:22 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ t_board	*read_and_validate(char *file)
 	normalize_tetrominos(tetrominos);
 	no_of_tets = tet_no(tetrominos);
 	set = get_set(tetrominos);
-	return (generate_board(no_of_tets, set));
+	return (generate_board(no_of_tets, set, 0));
 }

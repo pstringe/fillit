@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/29 10:41:36 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:32:25 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		calc_minsize(int n)
 }
 
 
-t_board		*generate_board(int no_of_tets, t_et *tets)
+t_board		*generate_board(int no_of_tets, t_et *tets, int exp)
 {
 	t_board	*board_struct;	
 	int 	min_size;
@@ -42,13 +42,13 @@ t_board		*generate_board(int no_of_tets, t_et *tets)
 
 	min_size = calc_minsize(no_of_tets);
 	board_struct = malloc(sizeof(t_board));
-	board = malloc(sizeof(char*) * min_size + 1);
+	board = malloc(sizeof(char*) * min_size + exp + 1);
 	i = 0;
-	while (i < min_size)
+	while (i < min_size + exp)
 	{
 		j = 0;
-		board[i] = malloc(min_size + 1);
-		while (j < min_size)
+		board[i] = malloc(min_size + exp + 1);
+		while (j < min_size + exp)
 		{
 			board[i][j] = '.';
 			j++;
@@ -57,7 +57,8 @@ t_board		*generate_board(int no_of_tets, t_et *tets)
 		i++;
 	}
 	board[i] = NULL;
-	board_struct->size = min_size;
+	board_struct->exp = exp;
+	board_struct->size = min_size + exp;
 	board_struct->stack = tets;
 	board_struct->map = board;
 
@@ -144,14 +145,6 @@ t_board		*place_tet(t_board *board, int x, int y)
 		{
 			if ((tet->value)[access_first_dimension(4, i, j)] != '.')
 			{
-				/*
-				if (x + i == board->size || y + j == board->size)
-				{
-					ft_putendl("the clearing condition executed");
-					clear_board(board);
-					return (NULL);
-				}
-				*/
 				if (board->map[x + i][y + j] == '.')
 				{
 					board->map[x + i][y + j] = tet->value[access_first_dimension(4, i, j)];
@@ -164,6 +157,7 @@ t_board		*place_tet(t_board *board, int x, int y)
 	tet->placed = 1;
 	return (board);
 }
+
 t_board		*place_the_next_motherfucking_tet(t_board *board)
 {
 	int 	x;
@@ -186,7 +180,6 @@ t_board		*place_the_next_motherfucking_tet(t_board *board)
 				}
 				else
 				{
-					ft_putendl("Shit don't fit!");
 					return (NULL);
 				}
 			}
@@ -195,10 +188,32 @@ t_board		*place_the_next_motherfucking_tet(t_board *board)
 	return (NULL);
 }
 
+t_board		*expand_board(t_board *board)
+{
+	t_et	*tmp;
+
+	tmp = board->stack;
+	while (tmp)
+	{
+		tmp->placed = 0;
+		tmp = tmp->next;
+	}
+	
+	board->exp++;
+	board = generate_board(3, board->stack, board->exp);
+	return (board);
+}
+
 t_board		*solve(t_board *board)
 {	
 	if (place_the_next_motherfucking_tet(board))
 	{
+		print_board(board->map);
+	}
+	else
+	{
+		board = expand_board(board);
+		//board = solve(board);
 		print_board(board->map);
 	}
 	return(board);
@@ -213,8 +228,11 @@ int		main(int argc, char **argv)
 		return (error(-6));
 	}
 	board = read_and_validate(argv[1]);
+	/*
 	print_board(board->map);
+	
 	board = solve(board);
 	print_board(board->map);
+	*/
 	return (0);
 }
