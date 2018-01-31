@@ -6,34 +6,13 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 20:00:45 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/30 17:31:41 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/01/30 18:10:48 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		has_valid_number_of_monominos(char *tetromino)
-{
-	int monominos;
-	if(!tetromino)
-	{
-		return (0);
-	}
-	monominos = 0;
-	while(*tetromino)
-	{
-		if(*tetromino != '.')
-		{
-			monominos++;
-		}
-		tetromino++;
-	}
-	if (monominos == 4)
-	{
-		return (1);
-	}
-	return (0);
-}
+
 /*
 static int		is_neighbor(char *tetromino, int i)
 {
@@ -125,13 +104,53 @@ static int		has_valid_number_of_connections(char *tetromino)
 	return	(neighbors == 6 || neighbors == 8);
 }
 
+static int		has_valid_number_of_monominos(char *tetromino, int n)
+{
+	int i;
+	int monominos;
+
+	if(!tetromino)
+	{
+		return (0);
+	}
+	i = 0;
+	monominos = 0;
+	while(i < 20)
+	{
+		if (i % 5 < 4)
+		{
+			if(!(tetromino[i] == '#' || tetromino[i] == '.'))
+			{
+				return (1);
+			}
+			if(tetromino[i] == '#' && ++monominos > 4)
+			{
+				return (2);
+			}
+		}
+		else if (tetromino[i] != '\n')
+		{
+			return (3);
+		}
+		i++;
+	}
+	if (n == 21 && tetromino[20] != '\n')
+	{
+		return (4);
+	}
+	if (!has_valid_number_of_connections(tetromino))
+	{
+		return (5);
+	}
+	return (0);
+}
 static int		is_valid_tetromino (char *tetromino)
 {
 	if(!tetromino)
 	{
 		return (0);
 	}
-	if(has_valid_number_of_monominos(tetromino) && has_valid_number_of_connections(tetromino) > 0)
+	if(has_valid_number_of_monominos(tetromino, 21) && has_valid_number_of_connections(tetromino) > 0)
 	{
 		return (1);
 	}
