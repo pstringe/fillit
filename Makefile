@@ -1,6 +1,7 @@
 CC = gcc
 NAME = fillit
-SRCS = fillit.c
+SRCS = fillit.c	\
+	   error.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L./libft -lft
 CFLAGS = -Wall -Werror -Wextra
@@ -13,7 +14,8 @@ DOBJS = $(patsubst %.c, %.o, $(DSRCS))
 all: $(NAME)
 	
 $(NAME): $(OBJS)
-	$(CC) $(OFLAGS) $(NAME) $(OBJS)
+	make -C ./libft
+	$(CC) $(OFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS)

@@ -6,11 +6,12 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 16:04:46 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/25 22:27:47 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/01 15:10:54 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+/*
 static	char *read_tetronimo_set(char *file)
 {
 	int		file_descriptor;
@@ -38,22 +39,35 @@ static	char *read_tetronimo_set(char *file)
 	}
 	return (unvalidated_tetromino_set);
 }
+*/
 
+t_list	*read_tets(int file)
+{
+	t_list	*tets;
+
+	if (file)
+	{
+		tets = NULL;
+	}
+	tets = NULL;
+	return (tets);
+}
 int		main(int argc, char **argv)
 {
-	char *unvalidated_tetromino_set;
+	int		file;
+	t_list	*tets;
+	//t_board	*board;
 
 	if(argc != 2)
 	{
-		return (0);
+		error(1);
+		return (1);
 	}
-	unvalidated_tetromino_set = read_tetronimo_set(argv[1]);
-/*
-	valid_tetromino_set = validate_tetromino_set(unvalidated_tetromino_set);
-	if(!valid_tetromino_set)
+	file = open(argv[1], O_RDONLY);
+	tets = read_tets(file);
+	if (!tets)
 	{
-		return(NULL);
+		error(2);
+		return (1);
 	}
-*/	
-	ft_putstr(unvalidated_tetromino_set);
 }

@@ -1,42 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/01 15:05:57 by pstringe         ###   ########.fr       */
+/*   Created: 2018/02/01 14:45:30 by pstringe          #+#    #+#             */
+/*   Updated: 2018/02/01 15:03:07 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FILLIT_H
-#define FILLIT_H
-#include "libft.h"
-#include <fcntl.h>
+#include "fillit.h"
 
-typedef struct	s_board
+void	error(int code)
 {
-	int		size;
-	char	**map;
-}				t_board;
-
-typedef	struct	s_point
-{
-	int		x;
-	int		y;
-}				t_point;
-
-typedef struct	s_ets
-{
-	char	**pos;
-	int		x_bounds;
-	int		y_bounds;
-	char	label;
-}				t_ets;
-
-/*
- * used throughout the program to display error messages
- */
-void	error(int code);
-#endif
+	if (code == 1)
+		ft_putendl("invalid no of arguments: 1");
+	if (code == 2)
+		ft_putendl("read error: 2");
+}
