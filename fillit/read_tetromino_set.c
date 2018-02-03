@@ -6,12 +6,17 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 10:57:48 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 19:00:43 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/03 11:57:44 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+ * reads buffer from file
+ * I wouldn't have to allocate for the max size if I read and validated TETRA_BYTES at a time
+ * I would then end the proccess when I came across an invalid tet 
+ */
 char *read_tetromino_set(char *file)
 {
     int     file_size;
@@ -42,6 +47,11 @@ char *read_tetromino_set(char *file)
     return (unvalidated_tetromino_set);
 }
 
+/*
+ * 	gets no of tets in array of tet strings, 
+ * 	not sure if I need this at this point, 
+ * 	I may have coded somethingthat obselesces it.
+ */
 int		tet_no(char **tets)
 {
 	int n;
@@ -54,6 +64,9 @@ int		tet_no(char **tets)
 	return (n);
 }
 
+/*
+ * this function initiated all reading as well as file validation and tet validation
+ */
 t_board	*read_and_validate(char *file)
 {
 	int 	no_of_tets;
