@@ -6,12 +6,20 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 13:18:03 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/20 15:38:31 by ralee            ###   ########.fr       */
+/*   Updated: 2018/02/03 11:29:05 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+ * these validation functions pass over the entire buffer being read in, looking back it would probably be a 
+ * lot less code, to vaidate indivaidul pieces as they are read in and assign them to structs
+ */
+
+/*
+ * checks for invalid chars
+ */
 static  int     is_valid_char(char c)
 {
     if (c == '\n' || c == '#' || c == '.')
@@ -21,6 +29,9 @@ static  int     is_valid_char(char c)
     return (0);
 }
 
+/*
+ * there is a maximum size for a file being there can  only be 26 tets in the input. This checks that
+ */
 static  int is_valid_filesize(char *unvalidated_tetromino_set)
 {
     int counter;
@@ -39,6 +50,9 @@ static  int is_valid_filesize(char *unvalidated_tetromino_set)
     return (0);
 }
 
+/*
+ * goes over every char in the file, and returns false as soon as there is an invalid char
+ */
 static int  is_valid_charset(char *unvalidated_tetromino_set)
 {
     int i;
@@ -54,6 +68,9 @@ static int  is_valid_charset(char *unvalidated_tetromino_set)
     return(1);
 }
 
+/*
+ * checks if the tet groups are properly shaped, of course, it could be the case that \n occur in stange order, * this would be caught in tetromino validation.
+ */
 static int  is_valid_number_of_newlines(char *unvalidated_tetromino_set)
 {
     int i;
@@ -77,6 +94,9 @@ static int  is_valid_number_of_newlines(char *unvalidated_tetromino_set)
     return (1);
 }
 
+/*
+ *	calls the above functions to perform all the file validation checks
+ */
 char    *validate_tetromino_set(char *unvalidated_tetromino_set)
 {
     if(!unvalidated_tetromino_set)

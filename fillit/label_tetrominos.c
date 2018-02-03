@@ -6,12 +6,15 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:35:50 by pstringe          #+#    #+#             */
-/*   Updated: 2018/01/26 20:36:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/03 11:46:00 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+/*
+ * gets a tetromino string by converting a set of split rows into one string.
+ * looking back, this is uneccesseraly complex. Probably could have done it using ft_strjoin.
+ */
 static char *get_tetromino(char **rows, int order)
 {
 	int i;
@@ -52,6 +55,9 @@ static char *get_tetromino(char **rows, int order)
 	return (tetromino);
 }
 
+/*
+ * gets the number of tets in a validated file buffer
+ */
 int			get_number_of_tetrominos(char *tetromino_set)
 {
 	int tetrominos;
@@ -59,6 +65,9 @@ int			get_number_of_tetrominos(char *tetromino_set)
 	return (tetrominos);
 }
 
+/*
+ * creates an array of tet strings from a validated file buffer
+ */
 char		**get_individual_tetrominos(char *valid_tetromino_set)
 {
 	char	**tetromino_rows;
@@ -83,6 +92,9 @@ char		**get_individual_tetrominos(char *valid_tetromino_set)
 	return (tetrominos);
 }
 
+/*
+ * creates a tet struct from a valid tet string
+ */
 t_et	*make_tet(char *tet_array, int order)
 {
 	t_et *tet;
@@ -94,6 +106,9 @@ t_et	*make_tet(char *tet_array, int order)
 	return (tet);
 }
 
+/*
+ * creates a stack of tets from a validated tet strings
+ */
 t_et	*get_set(char **tetrominos)
 {	
 	int	i;
