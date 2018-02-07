@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/26 11:18:20 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/29 15:39:39 by pstringe         ###   ########.fr       */
+/*   Created: 2018/02/05 11:41:34 by pstringe          #+#    #+#             */
+/*   Updated: 2018/02/06 21:13:26 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,9 @@
 
 int		error(int code)
 {
-	if(code == -1)
-		ft_putendl("file not read");
-	else if (code == -2)
-		ft_putendl("wrong number of characters");
-	else if (code == -3)
-		ft_putendl("invalid characters present in input");
-	else if (code == -4)
-		ft_putendl("wrong number of newlines present in input");
-	else if (code == -5)
-		ft_putendl("file is invalid");
-	else if (code == -6)
-		ft_putendl("Bad number of arguments:\nYou must enter one file name as an argument");
-	else if (code == -7)
-		ft_putendl("failed to allocate tetromino");
-	else if (code == -8)
-		ft_putendl("one or more supposed tetrominos do not fit the geometric definition of a tetromino. See the above reason.");
-	else if (code == -9)
-		ft_putendl("one or more of you tetrominos does not contain enough adjecencies");
+	if (code == 1)
+		ft_putendl("bad no of args, must enter one file name");
+	if (code == 2)
+		ft_putendl("invalid input");
 	return (code);
 }

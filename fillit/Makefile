@@ -2,13 +2,7 @@ CC = gcc
 INC = ../libft
 NAME = fillit
 SRCS = fillit.c\
-	   error.c\
-	   read_tetromino_set.c\
-	   file_validation.c\
-	   label_tetrominos.c\
-	   dimensional_access.c\
-	   validate_tetrominos.c\
-	   normalize_tetromino.c
+	   error.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 
@@ -19,11 +13,13 @@ DNAME = $(NAME)_debug
 DOBJS = $(patsubst %.c, %.o, $(DSRCS))
 
 all: $(NAME)
-	
+
 $(NAME): $(OBJS)
 	$(CC) $(OFLAGS)
+
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS)
+	echo "successful object compilation"
 
 clean:
 	rm -f $(OBJS)
@@ -32,12 +28,12 @@ fclean: clean
 	rm -f $(NAME)
 	rm -f $(DNAME)
 	rm -rf $(DNAME).dSYM
+
 re: fclean
 	make
 
 debug: $(DNAME)
 
-$(DNAME):
+$(DNAME): fclean
 	$(CC) $(DFLAGS) $(DNAME)
-	export DARGS=test
 	lldb $(DNAME) $(DARGS)
