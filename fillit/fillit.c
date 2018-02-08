@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/07 15:30:34 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:22:14 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define	TET		16
 /*
  *	counts a monomino's adjacent monominos
-
+ */
 int			adj(char *str, int i)
 {
 	int		top;
@@ -23,25 +23,28 @@ int			adj(char *str, int i)
 	int		left;
 	int		right;
 
-	top = (str[i - 4]) ? i - 4 : -1;
-	bottom = (str[i + 4]) ? i + 4 : -1;
-	right = (str[i + 1] && !(i % 4 || (i + 1) % 4)) ? i + 1: -1;
-	left = (str[i - 1] && !(i % 4 || (i + 1) % 4)) ? i - 1: -1;
+	top = (str[i - 4]) ? i - 4 : 0;
+	bottom = (str[i + 4]) ? i + 4 : 0;
+	right = (str[i + 1] && !(i % 4 || (i + 1) % 4)) ? i + 1: 0;
+	left = (str[i - 1] && !(i % 4 || (i + 1) % 4)) ? i - 1: 0;
 
-	return ((top == '#') + (bottom == '#') + (right == '#') + (left == '#'));
+	return ((str[top] == '#') + (str[bottom] == '#') + 
+			(str[right] == '#') + (str[left] == '#'));
 }
 
- */
 /*
  * validates an individual chunk
+ */
 int			validate(char **str)
 {
 	int		i;
 	int		count;
 	char	*tet;
 	int		a;
-	
-	while(str)
+		
+	tet = malloc(17);
+	tet[17] = '\0';
+	while(*str)
 	{
 		tet = ft_strjoin(tet, *str);
 		str++;
@@ -53,15 +56,15 @@ int			validate(char **str)
 	{
 		if (str[i] && !(tet[i] == '.' || tet[i] == '#'))
 			return (0);
-		else if ((tet[i] && (a += adj(tet, i))))
-			return (0);
 		else if (tet[i] == '#')
+		{
+			a += adj(tet, i);
 			count++;
+		}
 	}
 	return (count == 4 && (a == 6 || a == 8));
 }
 
- */
 /*
  * creates a tet and pushes it onto the list
 void		push_tet(t_et **head, char *buf)
@@ -156,18 +159,15 @@ void/*t_board		*/read_and_validate(char *file)
 
 	head = NULL;
 	fd = open(file, O_RDONLY);
-	while((bytes = read(fd, buf, PIECE)) >= PIECE - 1 /*&& validate(ft_strsplit(buf, '\n'))*/)
+	while((bytes = read(fd, buf, PIECE)) >= PIECE - 1)
 	{
 		if(bytes == PIECE)
-		{
 			buf[PIECE] = '\0';
-		}
 		else if(bytes == PIECE - 1)
-		{
 			buf[PIECE - 1] = '\0';
-		}
-		ft_putstr(buf);	
-		//push_tet(head, buf);
+		if (validate(ft_strsplit(buf, '\n')))
+			ft_putstr(buf);
+			//push_tet(head, buf);
 	}
 	/*
 	while((*head)->prev)
