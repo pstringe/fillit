@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/07 16:35:47 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:48:39 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,13 @@ char		*validate(char **str)
 
 /*
  * creates a tet and pushes it onto the list
-void		push_tet(t_et **head, char *buf)
+ */
+void		push_tet(t_et **head, char *tet)
 {
 	static int		order;
-	char			**rows;
-	char const		*value;
 	t_et			*tet;
 	
-	rows = ft_strsplit(buf, '\n');
-	while (*rows)
-	{
-		value = ft_strjoin(value, *rows++);
-	}
-	//ft_doublefree(value);
-	tet = (t_et*)malloc(sizeof(tet));
+	tet = malloc(sizeof(t_et));
 	tet->label = order + 65;
 	tet->placed = 0;
 	tet->value = value;
@@ -88,7 +81,6 @@ void		push_tet(t_et **head, char *buf)
 	tet->prev = NULL;
 	*head = tet; 
 }
-*/
 /*
  * calculates cieling of sqrt
 int		ft_sqrt(int y, int x)
@@ -174,7 +166,7 @@ void/*t_board		*/read_and_validate(char *file)
 		else
 		{
 			ft_putendl(tet);		
-			//push_tet(head, buf);
+			push_tet(head, tet);
 		}
 	}
 	/*
