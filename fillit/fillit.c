@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/07 16:22:14 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:35:47 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			adj(char *str, int i)
 /*
  * validates an individual chunk
  */
-int			validate(char **str)
+char		*validate(char **str)
 {
 	int		i;
 	int		count;
@@ -62,7 +62,7 @@ int			validate(char **str)
 			count++;
 		}
 	}
-	return (count == 4 && (a == 6 || a == 8));
+	return (count == 4 && (a == 6 || a == 8)) ? tet : NULL;
 }
 
 /*
@@ -151,6 +151,7 @@ t_board		root(t_et **head, int exp)
  */
 void/*t_board		*/read_and_validate(char *file)
 {
+	char	*tet;
 	int		bytes;
 	int		fd;
 	t_et	**head;
@@ -165,9 +166,16 @@ void/*t_board		*/read_and_validate(char *file)
 			buf[PIECE] = '\0';
 		else if(bytes == PIECE - 1)
 			buf[PIECE - 1] = '\0';
-		if (validate(ft_strsplit(buf, '\n')))
-			ft_putstr(buf);
+		if (!(tet = validate(ft_strsplit(buf, '\n'))))
+		{
+			error(2);
+			//return(NULL);
+		}
+		else
+		{
+			ft_putendl(tet);		
 			//push_tet(head, buf);
+		}
 	}
 	/*
 	while((*head)->prev)
