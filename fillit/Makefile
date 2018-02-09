@@ -2,6 +2,9 @@ CC = gcc
 INC = ../libft
 NAME = fillit
 SRCS = fillit.c\
+	   read.c\
+	   board.c\
+	   output.c\
 	   error.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft

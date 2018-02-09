@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/08 17:55:59 by pstringe         ###   ########.fr       */
+/*   Created: 2018/02/08 17:47:33 by pstringe          #+#    #+#             */
+/*   Updated: 2018/02/08 17:48:28 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int			main(int argc, char **argv)
+void		print_map(t_board *board)
 {
-	t_board		*board;
+	int i;
 
-	if(argc != 2)
-		return (error(1));
-	if (!(board = read_and_validate(argv[1])))
-		return (error(2));
-	print_map(board);
-	return (0);
+	i = -1;
+	while((board->map)[++i])
+	{
+		ft_putendl((board->map)[i]);
+	}
 }
+
