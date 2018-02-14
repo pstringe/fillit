@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/08 18:04:53 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:16:54 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,22 @@ static int			adj(char *str, int i)
 	return ((str[top] == '#') + (str[bottom] == '#') + 
 			(str[right] == '#') + (str[left] == '#'));
 }
+void	ft_lstadd_tail(t_list **head, t_list *new)
+{
+	t_list	*tmp;
 
+	tmp = *head;
+	if (!tmp)
+	{
+		*head = new;
+		return ;
+	}
+	while(tmp->next)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = new;
+}
 /*
  * validates an individual chunk
  */
@@ -76,6 +91,7 @@ static t_et	*make_tet(char *str)
 	tet->label = order + 65;
 	tet->placed = 0;
 	tet->value = str;
+	order++;
 	return (tet);
 }
 
@@ -90,7 +106,7 @@ t_board		*read_and_validate(char *file)
 	t_list	*tets;
 	char	buf[PIECE + 1];
 	
-	tets = ft_lstnew(NULL, sizeof(t_et*));
+	tets = NULL;
 	fd = open(file, O_RDONLY);
 	while((bytes = read(fd, buf, PIECE)) >= PIECE - 1)
 	{
@@ -105,7 +121,9 @@ t_board		*read_and_validate(char *file)
 		}
 		else
 		{
-			ft_lstadd(&tets, ft_lstnew(make_tet(tet), sizeof(void *)));
+			ft_lstadd_tail(&tets, ft_lstnew(make_tet(tet), sizeof(t_et)));
+			ft_putendl("during assignment");
+			print_value(tets, 1);
 		}
 	}
 	return(root(tets, 0));

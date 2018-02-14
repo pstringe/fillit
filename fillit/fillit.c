@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/08 17:55:59 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/08 18:51:53 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			main(int argc, char **argv)
 		return (error(1));
 	if (!(board = read_and_validate(argv[1])))
 		return (error(2));
+	print_tets(board->stack, 1);
 	print_map(board);
 	return (0);
 }

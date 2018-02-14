@@ -17,7 +17,9 @@ DOBJS = $(patsubst %.c, %.o, $(DSRCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+libft.a : ../libft/Makefile
+	make -C ../libft/
+$(NAME): libft.a $(OBJS)
 	$(CC) $(OFLAGS)
 
 $(OBJS): $(SRCS)
