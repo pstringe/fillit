@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:47:33 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 13:27:27 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:34:44 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		print_pretty(char *str, char label)
 	ft_putendl("\n");
 }
 
-void		print_value(t_list *tet, int p)
+void		print_tet(t_list *tet, int p)
 {
 	t_et	*tmp;
 
@@ -52,6 +52,18 @@ void		print_value(t_list *tet, int p)
 		ft_putendl(tmp->value);
 	else if (p == 1 && tmp->value)
 		print_pretty(tmp->value, tmp->label);
+	else if (p == 2 && tmp)
+	{
+		ft_putstr("label:\t");
+		ft_putchar(tmp->label);
+		ft_putchar('\n');
+		ft_putstr("bound_x:\t");
+		ft_putnbr(tmp->bound_x);
+		ft_putchar('\n');
+		ft_putstr("bound_y:\t");
+		ft_putnbr(tmp->bound_y);
+		ft_putendl("\n");
+	}
 }
 
 void		print_tets(t_list **tets, int p)
@@ -61,7 +73,7 @@ void		print_tets(t_list **tets, int p)
 	tmp = *tets;
 	while(tmp)
 	{
-		print_value(tmp, p);
+		print_tet(tmp, p);
 		tmp = tmp->next;
 	}
 }

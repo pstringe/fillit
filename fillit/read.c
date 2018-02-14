@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 13:30:52 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:40:11 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,30 @@ static char		*validate(char **str)
 }
 
 /*
+ * defines x and y boundries for tet
+ */
+t_et		*bind(t_et *tet)
+{
+	char	*str;
+	int		x;
+	int		y;
+	int 	i;
+	
+	str = (tet->value);
+	x = 0;
+	y = 0;
+	i = -1;
+	while (++i < 16)
+	{
+		x = (str[i] == '#' && i % 4 > x) ? i % 4 : x;
+		y = (str[i] == '#' && i / 4 > y) ? i / 4 : y;
+	}
+	tet->bound_x = x;
+	tet->bound_y = y;
+	return(tet);
+}
+
+/*
  * creates a tet and pushes it onto the list
  */
 static t_et	*make_tet(char *str)
@@ -106,7 +130,7 @@ t_board		*read_and_validate(char *file)
 		}
 		else
 		{
-			ft_lstadd_tail(&tets, ft_lstnew(make_tet(tet), sizeof(t_et)));
+			ft_lstadd_tail(&tets, ft_lstnew(bind(make_tet(tet)), sizeof(t_et)));
 		}
 	}
 	return(root(tets, 0));
