@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:47:33 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/12 19:37:41 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:27:27 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		print_pretty(char *str, char label)
 		else
 			ft_putchar(str[i]);
 	}
-	ft_putchar('\n');
+	ft_putendl("\n");
 }
 
 void		print_value(t_list *tet, int p)

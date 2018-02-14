@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:08:24 by ralee             #+#    #+#             */
-/*   Updated: 2018/02/08 18:33:22 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:36:48 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static int	can_move_left(char *tet)
 	return (1);
 }
 
-static void	move_top(char **tet)
+static void	move_top(char *tet)
 {
 	int		i;
 
-	while (can_move_up(*tet))
+	while (can_move_up(tet))
 	{
 		i = 0;
 		while (tet[i])
@@ -84,7 +84,7 @@ static void	move_left(char *tet)
 
 char		*normalize(char *tet)
 {
-	move_left(&tet[i]);
-	move_top(&tet[i]);
+	move_left(tet);
+	move_top(tet);
 	return (tet);
 }

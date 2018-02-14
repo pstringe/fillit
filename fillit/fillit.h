@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/12 19:02:14 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:34:42 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,21 @@ typedef struct	s_board
 	char			**map;
 }				t_board;
 
-int				error (int code);
+/*
+ * reading and validation
+ */
+char			*normalize(char *tet);
 t_board			*read_and_validate(char *str);
+
+/*
+ * algorithm
+ */
 t_board			*root(t_list *tets, int exp);
 
+/*
+ * output and testing
+ */
+int				error (int code);
 void			print_value(t_list *tet, int p);
 void			print_tets(t_list **tets, int p);
 void			print_map(t_board *board);

@@ -5,7 +5,8 @@ SRCS = fillit.c\
 	   read.c\
 	   board.c\
 	   output.c\
-	   error.c
+	   error.c\
+	   normalize.c
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 LIBD = -L$(INC) -lft
 CFLAGS = -Wall -Werror -Wextra -I$(INC) 
