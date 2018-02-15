@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 20:11:59 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:38:02 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ t_board		*place_tet(t_board *board, t_et *tet, int x, int y)
 		j = -1;
 		while (++j + x <= board->size - tet->bound_x)
 		{
-			board->map[i + y][j + x] = tet->label;
+			if((tet->value)[(i * 3) + j] == '#')
+			{
+				board->map[i + y][j + x] = tet->label;
+			}
 		}
 	}
 	return (board);
@@ -54,22 +57,23 @@ t_board		*resolve(t_board *board, t_list *lst)
 {
 	int		x;
 	int		y;
-	t_et	*tet;
-
-	tet = (t_et*)(lst->content); 
-	if (!tet)
+	t_et	tet;
+	
+	if (!lst)
 	{
 		return (board);
 	}
+	tet = (*(t_et*)(lst->content)); 
 	y = -1;
-	while (++y <=  board->size - tet->bound_y)
+	while (++y <=  board->size - tet.bound_y)
 	{
 		x = -1;
-		while (++x <= board->size - tet->bound_x)
+		while (++x <= board->size - tet.bound_x)
 		{
-			if (try_tet(board, tet, x, y))
+			if (try_tet(board, &tet, x, y))
 			{
-				place_tet(board, tet, x, y);
+				place_tet(board, &tet, x, y);
+				print_map(board);
 				return(resolve(board, lst->next));
 			}
 		}
