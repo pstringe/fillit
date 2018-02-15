@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 12:59:29 by pstringe          #+#    #+#             */
-/*   Updated: 2017/12/22 17:12:32 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/08 19:35:42 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void				ft_lstadd(t_list **alst, t_list *new);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_strlcat(char *dst, char const *src, size_t size);
 void				ft_bzero(void *s, size_t n);
+void				ft_lstadd_tail(t_list **head, t_list *new);
 #endif
