@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:44:13 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/09 11:20:59 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:02:20 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ t_board		*root(t_list *tets, int exp)
 	board->size = min_size;
 	board->stack = &tets;
 	board->map = map;
+	board->exp = exp;
 	return(board);
 }

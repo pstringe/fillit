@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 14:33:33 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:02:41 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_et
 typedef struct	s_board
 {
 	int				size;
+	int				exp;
 	struct s_list	**stack;
 	char			**map;
 }				t_board;
