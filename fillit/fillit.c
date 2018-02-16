@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/16 11:27:37 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:31:09 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,24 @@ int			try_tet(t_board *board, t_et *tet, int x, int y)
 	}
 	return (1);
 }
+void	clear_tet(t_board *board, t_et tet)
+{
+	int i;
+	int j;
 
+	i = -1;
+	while ((board->map)[++i])
+	{
+		j = -1;
+		while((board->map[i][++j]))
+		{
+			if((board->map)[i][j] == (tet.label) - 1)
+			{
+				(board->map)[i][j] = '.';
+			}
+		}
+	}
+}
 int		resolve(t_board *board, t_list *lst)
 {
 	int		x;
@@ -83,6 +100,7 @@ int		resolve(t_board *board, t_list *lst)
 			}
 		}
 	}
+	clear_tet(board, tet);
 	return (0);
 }
 

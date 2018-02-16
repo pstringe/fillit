@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/15 18:47:10 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:07:48 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char		*validate(char **str)
 			count++;
 		}
 	}
-	return (count == 4 && (a == 6 || a == 8)) ? tet : NULL;
+	return (count == 4 && a >= 6) ? tet : NULL;
 }
 
 /*
