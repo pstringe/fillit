@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/15 18:59:06 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/16 11:27:37 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_board		*place_tet(t_board *board, t_et *tet, int x, int y)
 	int		j;
 
 	i = 0;
-	while ((board->map)[y + i])
+	while ((board->map)[y + i] && i < 4)
 	{
 		j = 0;
-		while ((board->map)[y + i][x + j])
+		while ((board->map)[y + i][x + j] && j < 4)
 		{
 			if((tet->value)[(i * 4) + j] == '#')
 			{
@@ -57,7 +57,7 @@ int			try_tet(t_board *board, t_et *tet, int x, int y)
 	return (1);
 }
 
-t_board		*resolve(t_board *board, t_list *lst)
+int		resolve(t_board *board, t_list *lst)
 {
 	int		x;
 	int		y;
@@ -65,7 +65,7 @@ t_board		*resolve(t_board *board, t_list *lst)
 	
 	if (!lst)
 	{
-		return (board);
+		return (1);
 	}
 	tet = (*(t_et*)(lst->content)); 
 	y = -1;
@@ -78,11 +78,12 @@ t_board		*resolve(t_board *board, t_list *lst)
 			{
 				place_tet(board, &tet, x, y);
 				print_map(board);
-				return(resolve(board, lst->next));
+				if(resolve(board, lst->next))
+					return(1);
 			}
 		}
 	}
-	return (NULL);
+	return (0);
 }
 
 t_board		*solve(t_board *board)
