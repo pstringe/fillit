@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 14:40:11 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/15 18:47:10 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,30 @@ static int			adj(char *str, int i)
 	int		left;
 	int		right;
 
+	//ft_putstr("mon");
+
 	top = (str[i - 4]) ? i - 4 : 0;
 	bottom = (str[i + 4]) ? i + 4 : 0;
-	right = (str[i + 1] && !(i % 4 || (i + 1) % 4)) ? i + 1: 0;
-	left = (str[i - 1] && !(i % 4 || (i + 1) % 4)) ? i - 1: 0;
+	right = (i + 1) % 4 ? i + 1: -1;
+	left = (i % 4) ? i - 1: -1;
 
-	return ((str[top] == '#') + (str[bottom] == '#') + 
-			(str[right] == '#') + (str[left] == '#'));
+	top = (str[top] == '#') ? 1: 0;
+	bottom = (str[bottom] == '#') ? 1: 0;
+	right = (right >= 0 && str[right] == '#') ? 1: 0;
+	left = ( left >= 0 && str[left] == '#') ? 1: 0;
+
+	/*
+	ft_putchar('\n');
+	ft_putnbr(top);
+	ft_putchar('\n');
+	ft_putnbr(bottom);
+	ft_putchar('\n');
+	ft_putnbr(left);
+	ft_putchar('\n');
+	ft_putnbr(right);
+	ft_putchar('\n');
+	*/
+	return (top + bottom + right + left);
 }
 
 /*
