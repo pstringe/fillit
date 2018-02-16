@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/15 15:38:02 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:21:52 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ t_board		*place_tet(t_board *board, t_et *tet, int x, int y)
 	int		j;
 
 	i = -1;
-	while (++i + y <= board->size - tet->bound_y)
+	while (++i < 4)
 	{
 		j = -1;
-		while (++j + x <= board->size - tet->bound_x)
+		while (++j < 4)
 		{
 			if((tet->value)[(i * 3) + j] == '#')
 			{
 				board->map[i + y][j + x] = tet->label;
 			}
-		}
+		}	
 	}
 	return (board);
 }
@@ -38,10 +38,10 @@ int			try_tet(t_board *board, t_et *tet, int x, int y)
 	int		j;
 
 	i = -1;
-	while (++i <= board->size - tet->bound_y)
+	while (++i <= board->size - 1 -tet->bound_y)
 	{
 		j = -1;
-		while (++j < board->size - tet->bound_x)
+		while (++j < board->size - 1 - tet->bound_x)
 		{
 			if ((board->map)[y + i][x + j] != '.' &&
 				(tet->value)[(i * 3) + j] != '.')
@@ -65,10 +65,10 @@ t_board		*resolve(t_board *board, t_list *lst)
 	}
 	tet = (*(t_et*)(lst->content)); 
 	y = -1;
-	while (++y <=  board->size - tet.bound_y)
+	while (++y <=  board->size - 1 - tet.bound_y)
 	{
 		x = -1;
-		while (++x <= board->size - tet.bound_x)
+		while (++x <= board->size - 1 - tet.bound_x)
 		{
 			if (try_tet(board, &tet, x, y))
 			{
@@ -86,7 +86,6 @@ t_board		*solve(t_board *board)
 	while (!resolve(board, *(board->stack)))
 	{
 		board = root(*(board->stack), board->exp + 1);
-		ft_putendl("");
 	}
 	return (NULL);
 }
@@ -100,6 +99,6 @@ int		main(int argc, char **argv)
 	if (!(board = read_and_validate(argv[1])))
 		return (error(2));
 	solve(board);
-
+	print_map(board);
 	return (0);
 }
