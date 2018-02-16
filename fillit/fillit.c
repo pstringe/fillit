@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/15 16:21:52 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:39:45 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@ t_board		*place_tet(t_board *board, t_et *tet, int x, int y)
 	int		i;
 	int		j;
 
-	i = -1;
-	while (++i < 4)
+	i = 0;
+	while ((board->map)[y + i])
 	{
-		j = -1;
-		while (++j < 4)
+		j = 0;
+		while ((board->map)[y + i][x + j])
 		{
 			if((tet->value)[(i * 3) + j] == '#')
 			{
 				board->map[i + y][j + x] = tet->label;
 			}
-		}	
+			j++;
+		}
+		i++;	
 	}
 	return (board);
 }
@@ -37,18 +39,20 @@ int			try_tet(t_board *board, t_et *tet, int x, int y)
 	int		i;
 	int		j;
 
-	i = -1;
-	while (++i <= board->size - 1 -tet->bound_y)
+	i = 0;
+	while ((board->map)[y + i])
 	{
-		j = -1;
-		while (++j < board->size - 1 - tet->bound_x)
+		j = 0;
+		while ((board->map)[y + i][x + j])
 		{
 			if ((board->map)[y + i][x + j] != '.' &&
 				(tet->value)[(i * 3) + j] != '.')
 			{
 				return(0);
 			}
+			j++;
 		}
+		i++;
 	}
 	return (1);
 }
