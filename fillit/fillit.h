@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 15:02:41 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/16 19:16:24 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ t_board			*read_and_validate(char *str);
 /*
  * algorithm
  */
+t_board			*solve(t_board *board);
 t_board			*root(t_list *tets, int exp);
 
 /*
- * output and testing
+ * output and debugging
  */
 int				error (int code);
 void			print_value(t_list *tet, int p);
