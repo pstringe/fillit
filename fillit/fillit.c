@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 16:38:40 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/16 13:31:09 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/16 18:50:37 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int			try_tet(t_board *board, t_et *tet, int x, int y)
 	int		j;
 
 	i = 0;
-	while ((board->map)[y + i])
+	while ((board->map)[y + i] && i < 4)
 	{
 		j = 0;
-		while ((board->map)[y + i][x + j])
+		while ((board->map)[y + i][x + j] && j < 4)
 		{
 			if ((board->map)[y + i][x + j] != '.' &&
-				(tet->value)[(i * 3) + j] != '.')
+				(tet->value)[(i * 4) + j] != '.')
 			{
 				return(0);
 			}
@@ -56,6 +56,7 @@ int			try_tet(t_board *board, t_et *tet, int x, int y)
 	}
 	return (1);
 }
+
 void	clear_tet(t_board *board, t_et tet)
 {
 	int i;
@@ -74,6 +75,7 @@ void	clear_tet(t_board *board, t_et tet)
 		}
 	}
 }
+
 int		resolve(t_board *board, t_list *lst)
 {
 	int		x;
