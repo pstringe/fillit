@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/16 13:07:48 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:13:13 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ static char		*validate(char **str)
 	char	*tet;
 	int		a;
 		
-	tet = malloc(17);
-	tet[17] = '\0';
+	tet = ft_strnew(17);
 	while(*str)
 	{
+		if (ft_strlen(*str) != 4)
+			return (NULL);
 		tet = ft_strjoin(tet, *str);
 		str++;
 	}
@@ -142,7 +143,6 @@ t_board		*read_and_validate(char *file)
 			buf[PIECE - 1] = '\0';
 		if (!(tet = normalize(validate(ft_strsplit(buf, '\n')))))
 		{
-			error(2);
 			return((t_board*)NULL);
 		}
 		else

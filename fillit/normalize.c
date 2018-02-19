@@ -6,7 +6,7 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 16:08:24 by ralee             #+#    #+#             */
-/*   Updated: 2018/02/14 13:36:48 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:59:03 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static void	move_left(char *tet)
 
 char		*normalize(char *tet)
 {
+	if(!tet)
+		return(NULL);
 	move_left(tet);
 	move_top(tet);
 	return (tet);
