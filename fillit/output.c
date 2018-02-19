@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:47:33 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/18 16:37:56 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:26:53 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void		print_map(t_board *board)
 	int i;
 
 	i = -1;
-	while(i <= board->size && (board->map)[++i])
+	while (i <= board->size && (board->map)[++i])
 	{
 		ft_putendl((board->map)[i]);
 	}
 }
 
-static void		print_pretty(char *str, char label)
+static void	print_pretty(char *str, char label)
 {
 	int i;
 
@@ -47,7 +47,6 @@ void		print_tet(t_list *tet, int p)
 	if (!tet)
 		return ;
 	tmp = ((t_et*)(tet->content));
-
 	if (p == 0 && tmp->value)
 		ft_putendl(tmp->value);
 	else if (p == 1 && tmp->value)
@@ -69,9 +68,9 @@ void		print_tet(t_list *tet, int p)
 void		print_tets(t_list **tets, int p)
 {
 	t_list	*tmp;
-	
+
 	tmp = *tets;
-	while(tmp)
+	while (tmp)
 	{
 		print_tet(tmp, p);
 		tmp = tmp->next;
