@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/18 17:13:13 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 19:20:54 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ static int			adj(char *str, int i)
 	bottom = (str[bottom] == '#') ? 1: 0;
 	right = (right >= 0 && str[right] == '#') ? 1: 0;
 	left = ( left >= 0 && str[left] == '#') ? 1: 0;
-
-	/*
-	ft_putchar('\n');
-	ft_putnbr(top);
-	ft_putchar('\n');
-	ft_putnbr(bottom);
-	ft_putchar('\n');
-	ft_putnbr(left);
-	ft_putchar('\n');
-	ft_putnbr(right);
-	ft_putchar('\n');
-	*/
 	return (top + bottom + right + left);
 }
 
@@ -58,13 +46,13 @@ static char		*validate(char **str)
 	char	*tet;
 	int		a;
 		
+	i = -1;
 	tet = ft_strnew(17);
-	while(*str)
+	while(str[++i])
 	{
-		if (ft_strlen(*str) != 4)
+		if (ft_strlen(str[i]) != 4 || i > 3)
 			return (NULL);
-		tet = ft_strjoin(tet, *str);
-		str++;
+		tet = ft_strjoin(tet, str[i]);
 	}
 	a = 0;
 	count = 0;
@@ -142,13 +130,9 @@ t_board		*read_and_validate(char *file)
 		else if(bytes == PIECE - 1)
 			buf[PIECE - 1] = '\0';
 		if (!(tet = normalize(validate(ft_strsplit(buf, '\n')))))
-		{
 			return((t_board*)NULL);
-		}
 		else
-		{
 			ft_lstadd_tail(&tets, ft_lstnew(bind(make_tet(tet)), sizeof(t_et)));
-		}
 	}
-	return(root(tets, 0));
+	return (tets) ? root(tets, 0) : NULL;
 }
