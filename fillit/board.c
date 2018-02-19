@@ -6,33 +6,31 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:44:13 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/18 16:33:28 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:15:55 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
- * gets minimum size based on the number of tets
- */
-static int			calc_minsize(t_list *tets)
+**gets minimum size based on the number of tets
+*/
+static int	calc_minsize(t_list *tets)
 {
 	t_list	*tmp;
-	int 	n;
+	int		n;
 	int		y;
-		
-	
-	tmp = tets;
+
 	n = 0;
 	while (tmp != NULL)
 	{
 		tmp = tmp->next;
 		n++;
 	}
-   	y = 0;
+	y = 0;
 	while (y * y < n * 4)
-		y++;	
-	if(n != 1)
+		y++;
+	if (n != 1)
 	{
 		return (y);
 	}
@@ -40,12 +38,12 @@ static int			calc_minsize(t_list *tets)
 }
 
 /*
- * generates a board based on the number of tets and the expansion
- */
+**generates a board based on the number of tets and the expansion
+*/
 t_board		*root(t_list *tets, int exp)
 {
-	t_board	*board;	
-	int 	min_size;
+	t_board	*board;
+	int		min_size;
 	char	**map;
 	int		i;
 	int		j;
@@ -68,5 +66,5 @@ t_board		*root(t_list *tets, int exp)
 	board->stack = &tets;
 	board->map = map;
 	board->exp = exp;
-	return(board);
+	return (board);
 }
