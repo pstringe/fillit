@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:08:48 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 15:47:46 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:52:25 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void		clear_tet(t_board *board, t_et tet)
 }
 
 /*
-**trys to resolve a board given the tets
+** trys to resolve a board given the tets
 */
 static int		resolve(t_board *board, t_list *lst)
 {

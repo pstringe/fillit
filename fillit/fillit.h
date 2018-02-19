@@ -6,16 +6,16 @@
 /*   By: ralee <ralee@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:21:26 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/16 19:16:24 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:59:14 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FILLIT_H
-#define FILLIT_H
-#include "libft.h"
-#include <fcntl.h>
-#define	PIECE	21
-#define	TET		16
+#ifndef FILLIT_H
+# define FILLIT_H
+# include "libft.h"
+# include <fcntl.h>
+# define PIECE	21
+# define TET	16
 
 typedef struct	s_et
 {
@@ -35,20 +35,20 @@ typedef struct	s_board
 }				t_board;
 
 /*
- * reading and validation
- */
+** reading and validation
+*/
 char			*normalize(char *tet);
 t_board			*read_and_validate(char *str);
 
 /*
- * algorithm
- */
+** algorithm
+*/
 t_board			*solve(t_board *board);
 t_board			*root(t_list *tets, int exp);
 
 /*
- * output and debugging
- */
+** output and debugging
+*/
 int				error (int code);
 void			print_value(t_list *tet, int p);
 void			print_tets(t_list **tets, int p);
