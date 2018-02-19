@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/18 20:02:38 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 20:10:21 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ t_board		*read_and_validate(char *file)
 		else
 			ft_lstadd_tail(&tets, ft_lstnew(bind(make_tet(tet)), sizeof(t_et)));
 	}
-	return (tets && !(bytes < PIECE - 1 && bytes != 0)) 
+	return (tets && !(bytes < PIECE - 1 && bytes != 0)
+			&& ft_strlen(buf) == PIECE - 1) 
 		? root(tets, 0) : NULL;
 }
