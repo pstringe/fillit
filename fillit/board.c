@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:44:13 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 15:15:55 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:50:39 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	calc_minsize(t_list *tets)
 	int		n;
 	int		y;
 
+	tmp = tets;
 	n = 0;
 	while (tmp != NULL)
 	{
