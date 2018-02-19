@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:08:48 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/16 19:13:16 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:36:14 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int		resolve(t_board *board, t_list *lst)
 			if (try_tet(board, &tet, x, y))
 			{
 				place_tet(board, &tet, x, y);
-				print_map(board);
+				//print_map(board);
 				if(resolve(board, lst->next))
 					return(1);
 			}
@@ -130,5 +130,5 @@ t_board	*solve(t_board *board)
 	{
 		board = root(tets, board->exp + 1);
 	}
-	return (NULL);
+	return (board);
 }

@@ -6,26 +6,11 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:44:13 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/15 19:08:52 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:33:28 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*
- * calculates cieling of sqrt
- */
-static int		ft_sqrt(int y, int x)
-{
-	if ( y * y >= x)
-	{
-		return (y);
-	}
-	else
-	{
-		return (ft_sqrt(++y, x));
-	}
-}
 
 /*
  * gets minimum size based on the number of tets
@@ -34,17 +19,22 @@ static int			calc_minsize(t_list *tets)
 {
 	t_list	*tmp;
 	int 	n;
+	int		y;
+		
 	
 	tmp = tets;
-	n = -1;
+	n = 0;
 	while (tmp != NULL)
 	{
 		tmp = tmp->next;
 		n++;
-	} 
+	}
+   	y = 0;
+	while (y * y < n * 4)
+		y++;	
 	if(n != 1)
 	{
-		return (ft_sqrt(0, n * 4));
+		return (y);
 	}
 	return (2);
 }
@@ -63,17 +53,17 @@ t_board		*root(t_list *tets, int exp)
 	min_size = calc_minsize(tets);
 	board = ft_memalloc(sizeof(t_board));
 	map = ft_memalloc(sizeof(char*) * min_size + exp + 1);
+	map[min_size + exp] = NULL;
 	i = -1;
 	while (++i < min_size + exp)
 	{
 		j = -1;
-		map[i] = ft_strnew(min_size + exp + 1);
+		map[i] = ft_strnew(min_size + exp);
 		while (++j < min_size + exp)
 		{
 			map[i][j] = '.';
 		}
 	}
-	map[i] = NULL;
 	board->size = min_size + exp;
 	board->stack = &tets;
 	board->map = map;

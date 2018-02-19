@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:47:33 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/15 16:04:25 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 16:37:56 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ void		print_map(t_board *board)
 	int i;
 
 	i = -1;
-	while((board->map)[++i])
+	while(i <= board->size && (board->map)[++i])
 	{
 		ft_putendl((board->map)[i]);
 	}
-	ft_putendl("");
 }
 
 static void		print_pretty(char *str, char label)
