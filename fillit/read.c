@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/18 19:20:54 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/18 20:02:38 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static char		*validate(char **str)
 	tet = ft_strnew(17);
 	while(str[++i])
 	{
-		if (ft_strlen(str[i]) != 4 || i > 3)
-			return (NULL);
 		tet = ft_strjoin(tet, str[i]);
+		if (ft_strlen(tet) != (size_t)((i + 1) * 4) || (!str[i + 1]  && i < 3))
+			return (NULL);
 	}
 	a = 0;
 	count = 0;
@@ -60,7 +60,7 @@ static char		*validate(char **str)
 	while (++i < TET)
 	{
 		if (str[i] && !(tet[i] == '.' || tet[i] == '#'))
-			return (0);
+			return (NULL);
 		else if (tet[i] == '#')
 		{
 			a += adj(tet, i);
@@ -134,5 +134,6 @@ t_board		*read_and_validate(char *file)
 		else
 			ft_lstadd_tail(&tets, ft_lstnew(bind(make_tet(tet)), sizeof(t_et)));
 	}
-	return (tets) ? root(tets, 0) : NULL;
+	return (tets && !(bytes < PIECE - 1 && bytes != 0)) 
+		? root(tets, 0) : NULL;
 }
