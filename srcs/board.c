@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:44:13 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 16:36:12 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:54:30 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	calc_minsize(t_list *tets)
 	{
 		tmp = tmp->next;
 		n++;
+		if (n > 26)
+			return (-1);
 	}
 	y = 0;
 	while (y * y < n * 4)
@@ -69,5 +71,5 @@ t_board		*root(t_list *tets, int exp)
 	board->stack = &tets;
 	board->map = map;
 	board->exp = exp;
-	return (board);
+	return (min_size != -1 && board) ? board: NULL;
 }

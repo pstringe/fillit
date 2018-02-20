@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:08:48 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 16:42:28 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 20:00:26 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ t_board			*solve(t_board *board)
 	tets = *(board->stack);
 	while (!resolve(board, *(board->stack)))
 	{
-		board = root(tets, board->exp + 1);
+		if(!(board = root(tets, board->exp + 1)))
+			return (NULL);
 	}
 	return (board);
 }
