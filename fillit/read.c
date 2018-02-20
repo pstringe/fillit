@@ -6,15 +6,15 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/18 20:10:21 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:14:10 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
- *	counts a monomino's adjacent monominos
- */
+** counts a monomino's adjacent monominos
+*/
 static int			adj(char *str, int i)
 {
 	int		top;
@@ -22,36 +22,33 @@ static int			adj(char *str, int i)
 	int		left;
 	int		right;
 
-	//ft_putstr("mon");
-
 	top = (str[i - 4]) ? i - 4 : 0;
 	bottom = (str[i + 4]) ? i + 4 : 0;
-	right = (i + 1) % 4 ? i + 1: -1;
-	left = (i % 4) ? i - 1: -1;
-
-	top = (str[top] == '#') ? 1: 0;
-	bottom = (str[bottom] == '#') ? 1: 0;
-	right = (right >= 0 && str[right] == '#') ? 1: 0;
-	left = ( left >= 0 && str[left] == '#') ? 1: 0;
+	right = (i + 1) % 4 ? i + 1 : -1;
+	left = (i % 4) ? i - 1 : -1;
+	top = (str[top] == '#') ? 1 : 0;
+	bottom = (str[bottom] == '#') ? 1 : 0;
+	right = (right >= 0 && str[right] == '#') ? 1 : 0;
+	left = (left >= 0 && str[left] == '#') ? 1 : 0;
 	return (top + bottom + right + left);
 }
 
 /*
- * validates an individual chunk
- */
+** validates an individual chunk
+*/
 static char		*validate(char **str)
 {
 	int		i;
 	int		count;
 	char	*tet;
 	int		a;
-		
+
 	i = -1;
 	tet = ft_strnew(17);
-	while(str[++i])
+	while (str[++i])
 	{
 		tet = ft_strjoin(tet, str[i]);
-		if (ft_strlen(tet) != (size_t)((i + 1) * 4) || (!str[i + 1]  && i < 3))
+		if (ft_strlen(tet) != (size_t)((i + 1) * 4) || (!str[i + 1] && i < 3))
 			return (NULL);
 	}
 	a = 0;
@@ -71,15 +68,15 @@ static char		*validate(char **str)
 }
 
 /*
- * defines x and y boundries for tet
- */
+** defines x and y boundries for tet
+*/
 t_et		*bind(t_et *tet)
 {
 	char	*str;
 	int		x;
 	int		y;
-	int 	i;
-	
+	int		i;
+
 	str = (tet->value);
 	x = 0;
 	y = 0;
@@ -91,12 +88,12 @@ t_et		*bind(t_et *tet)
 	}
 	tet->bound_x = x;
 	tet->bound_y = y;
-	return(tet);
+	return (tet);
 }
 
 /*
- * creates a tet and pushes it onto the list
- */
+** creates a tet and pushes it onto the list
+*/
 static t_et	*make_tet(char *str)
 {
 	static int		order;
@@ -111,8 +108,8 @@ static t_et	*make_tet(char *str)
 }
 
 /*
- * reads and validates the file one chunck at a time
- */
+** reads and validates the file one chunck at a time
+*/
 t_board		*read_and_validate(char *file)
 {
 	char	*tet;
@@ -120,21 +117,20 @@ t_board		*read_and_validate(char *file)
 	int		fd;
 	t_list	*tets;
 	char	buf[PIECE + 1];
-	
+
 	tets = NULL;
 	fd = open(file, O_RDONLY);
-	while((bytes = read(fd, buf, PIECE)) >= PIECE - 1)
+	while ((bytes = read(fd, buf, PIECE)) >= PIECE - 1)
 	{
-		if(bytes == PIECE)
+		if (bytes == PIECE)
 			buf[PIECE] = '\0';
-		else if(bytes == PIECE - 1)
+		else if (bytes == PIECE - 1)
 			buf[PIECE - 1] = '\0';
 		if (!(tet = normalize(validate(ft_strsplit(buf, '\n')))))
-			return((t_board*)NULL);
+			return ((t_board*)NULL);
 		else
 			ft_lstadd_tail(&tets, ft_lstnew(bind(make_tet(tet)), sizeof(t_et)));
 	}
 	return (tets && !(bytes < PIECE - 1 && bytes != 0)
-			&& ft_strlen(buf) == PIECE - 1) 
-		? root(tets, 0) : NULL;
+			&& ft_strlen(buf) == PIECE - 1) ? root(tets, 0) : NULL;
 }
