@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 17:38:21 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 16:14:10 by pstringe         ###   ########.fr       */
+/*   Created: 2018/02/19 16:30:30 by pstringe          #+#    #+#             */
+/*   Updated: 2018/02/19 16:32:49 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** counts a monomino's adjacent monominos
 */
+
 static int			adj(char *str, int i)
 {
 	int		top;
@@ -36,7 +37,8 @@ static int			adj(char *str, int i)
 /*
 ** validates an individual chunk
 */
-static char		*validate(char **str)
+
+static char			*validate(char **str)
 {
 	int		i;
 	int		count;
@@ -70,7 +72,8 @@ static char		*validate(char **str)
 /*
 ** defines x and y boundries for tet
 */
-t_et		*bind(t_et *tet)
+
+t_et				*bind(t_et *tet)
 {
 	char	*str;
 	int		x;
@@ -94,7 +97,8 @@ t_et		*bind(t_et *tet)
 /*
 ** creates a tet and pushes it onto the list
 */
-static t_et	*make_tet(char *str)
+
+static t_et			*make_tet(char *str)
 {
 	static int		order;
 	t_et			*tet;
@@ -110,7 +114,8 @@ static t_et	*make_tet(char *str)
 /*
 ** reads and validates the file one chunck at a time
 */
-t_board		*read_and_validate(char *file)
+
+t_board				*read_and_validate(char *file)
 {
 	char	*tet;
 	int		bytes;
