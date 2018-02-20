@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 17:44:13 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 15:50:39 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:36:12 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 **gets minimum size based on the number of tets
 */
+
 static int	calc_minsize(t_list *tets)
 {
 	t_list	*tmp;
@@ -41,6 +42,7 @@ static int	calc_minsize(t_list *tets)
 /*
 **generates a board based on the number of tets and the expansion
 */
+
 t_board		*root(t_list *tets, int exp)
 {
 	t_board	*board;
