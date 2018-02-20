@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 19:20:23 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/14 13:20:04 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:16:06 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_lstadd_tail(t_list **head, t_list *new)
 		*head = new;
 		return ;
 	}
-	while(tmp->next)
+	while (tmp->next)
 	{
 		tmp = tmp->next;
 	}
