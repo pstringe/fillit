@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 16:30:30 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 16:32:49 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:51:29 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,8 @@ static char			*validate(char **str)
 	{
 		if (str[i] && !(tet[i] == '.' || tet[i] == '#'))
 			return (NULL);
-		else if (tet[i] == '#')
-		{
-			a += adj(tet, i);
-			count++;
-		}
+		a += (tet[i] == '#') ? adj(tet, i) : 0;
+		count += (tet[i] == '#') ? 1 : 0;
 	}
 	return (count == 4 && a >= 6) ? tet : NULL;
 }
