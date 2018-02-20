@@ -6,7 +6,7 @@
 /*   By: pstringe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:08:48 by pstringe          #+#    #+#             */
-/*   Updated: 2018/02/19 15:52:25 by pstringe         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:42:28 by pstringe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** places a tet once it is determined that it can fit
 */
+
 static t_board	*place_tet(t_board *board, t_et *tet, int x, int y)
 {
 	int		i;
@@ -41,6 +42,7 @@ static t_board	*place_tet(t_board *board, t_et *tet, int x, int y)
 ** checks that a tet can fit in a position before it is placed
 ** to avoid segfaults
 */
+
 static int		try_tet(t_board *board, t_et *tet, int x, int y)
 {
 	int		i;
@@ -66,6 +68,7 @@ static int		try_tet(t_board *board, t_et *tet, int x, int y)
 ** clears the tet when it is determined that the current
 ** solution can't be completed
 */
+
 static void		clear_tet(t_board *board, t_et tet)
 {
 	int i;
@@ -86,6 +89,7 @@ static void		clear_tet(t_board *board, t_et tet)
 /*
 ** trys to resolve a board given the tets
 */
+
 static int		resolve(t_board *board, t_list *lst)
 {
 	int		x;
@@ -116,7 +120,8 @@ static int		resolve(t_board *board, t_list *lst)
 /*
 ** starts ssolving at the minimum size board
 */
-t_board		*solve(t_board *board)
+
+t_board			*solve(t_board *board)
 {
 	t_list *tets;
 
